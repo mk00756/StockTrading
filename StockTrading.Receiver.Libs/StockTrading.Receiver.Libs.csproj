@@ -10,9 +10,4 @@
     <PackageReference Include="AWSSDK.S3" Version="3.3.110.43" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\StockTrading.Receiver\StockTrading.Receiver.csproj" />
-    <ProjectReference Include="..\StockTraiding.Receaver.Contracts\StockTraiding.Receaver.Contracts.csproj" />
-  </ItemGroup>
-
 </Project>

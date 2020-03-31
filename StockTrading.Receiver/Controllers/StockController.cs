@@ -6,16 +6,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StockTrading.Receiver;
 using StockTraiding;
+using StockTraiding.Receaver.Contracts;
 
 namespace StockTrading.Receiver.Controllers {
     [Route("api/Reciver")]
     [ApiController]
     public class StockController : ControllerBase {
-        [HttpGet]
-        [Route("GetAll")]
-        public async Task<IEnumerable<StockRespons>> GetAllStocks() {
+        //[HttpGet]
+        //[Route("GetAll")]
+        //public async Task<IEnumerable<StockRespons>> GetAllStocks() {
 
-        }
+        //}
 
     }
 }
