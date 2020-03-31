@@ -8,6 +8,6 @@ namespace StockTrading.Sender.Controllers
 {
     public class SenderController : Controller
     {
-	//a comment
+
     }
 }
