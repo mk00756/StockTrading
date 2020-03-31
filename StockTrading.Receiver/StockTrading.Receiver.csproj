@@ -5,12 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.Core" Version="3.3.105.6" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.105.19" />
+    <PackageReference Include="AWSSDK.S3" Version="3.3.110.43" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="RabbitMQ.Client" Version="5.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StockTrading.Receiver.Libs\StockTrading.Receiver.Libs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StockTrading.Receiver.Libs\StockTrading.Receiver.Libs.csproj" />
+    <ProjectReference Include="..\StockTrading.Sender.Libs\StockTrading.Sender.Libs.csproj" />
   </ItemGroup>
 
 
