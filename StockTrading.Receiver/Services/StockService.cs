@@ -1,4 +1,5 @@
-﻿using StockTrading.Sender.Mappers;
+﻿using StockTrading.Receiver.Methods;
+using StockTraiding.Receaver.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,9 @@ namespace StockTrading.Receiver.Services {
             _mapper = mapper;
         }
 
+        public async Task<IEnumerable<StockRespons>> GetAllItemsFromDatabase() {
+            var response = await _stockRepository.GetAllItems();
+            return _mapper.ToStockContract(response);
+        }
     }
 }
