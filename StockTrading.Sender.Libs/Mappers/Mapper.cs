@@ -1,4 +1,5 @@
 ﻿using StockTrading.Sender.Models;
+using System;
 
 namespace StockTrading.Sender.Mappers
 {
@@ -10,8 +11,9 @@ namespace StockTrading.Sender.Mappers
             {
                 Name = stockDB.Name,
                 Price = stockDB.Price,
-                LastUpdated = stockDB.LastUpdated
+                LastUpdated = DateTime.UtcNow.ToString()
             };
         }
+
     }
 }
