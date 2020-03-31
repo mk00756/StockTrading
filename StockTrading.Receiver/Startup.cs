@@ -18,8 +18,6 @@ namespace StockTrading.Receiver {
             services.AddMvc();
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
-            //services.AddSingleton<IStockRepository, Sto>
-
             services.AddControllers();
         }
 
