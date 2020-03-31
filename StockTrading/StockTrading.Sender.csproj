@@ -12,5 +12,9 @@
 >>>>>>> master
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.105.19" />
+  </ItemGroup>
+
 
 </Project>
