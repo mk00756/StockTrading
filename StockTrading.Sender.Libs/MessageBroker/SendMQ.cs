@@ -8,11 +8,6 @@ namespace StockTrading.Sender.Libs.MessageBroker
 {
     public class SendMQ
     {
-        public class SendMQ(StockDB)
-            {
-            public int MyProperty { get; set; }
-    }
-
         public void SendStock(StockDB stockDB)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
