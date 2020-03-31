@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using Newtonsoft.Json;
+using RabbitMQ.Client;
 using StockTrading.Sender.Models;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,9 @@ namespace StockTrading.Sender.Libs.MessageBroker
 
         private static string GetMessage(StockDB stockDB)
         {
-            return ($"{stockDB.Name} {stockDB.Price}");
+            String jsonified = JsonConvert.SerializeObject(stockDB);
+
+            return jsonified;
 
         }
 
