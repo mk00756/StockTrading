@@ -11,9 +11,20 @@ namespace StockTrading.Sender.Mappers
             {
                 Name = stockDB.Name,
                 Price = stockDB.Price,
+                LastUpdated = stockDB.LastUpdated
+            };
+        }
+        public StockDB ToStockDBModel(string name, StockDB stockDB)
+        {
+            return new StockDB
+            {
+                Name = stockDB.Name,
+                Price = stockDB.Price,
                 LastUpdated = DateTime.UtcNow.ToString()
             };
         }
+
+
 
     }
 }
