@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockTrading.Receiver", "StockTrading.Receiver\StockTrading.Receiver.csproj", "{969515FF-BA83-4CFD-A072-94E256AC027A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockTrading.Libs", "StockTrading.Libs\StockTrading.Libs.csproj", "{A734C944-62F5-4370-AF1A-73ED9AC0B936}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockTrading.Sender.Libs", "StockTrading.Sender.Libs\StockTrading.Sender.Libs.csproj", "{93FECED8-6C70-465E-8890-84A114EC956D}"
@@ -13,16 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTrading.Receiver.Libs"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTraiding.Reciver.Contracts", "StockTraiding.Reciver.Contracts\StockTraiding.Reciver.Contracts.csproj", "{754E4DB2-4592-4B42-B7AC-CB7293823558}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTrading.Receiver", "StockTrading.Receiver\StockTrading.Receiver.csproj", "{EBEF45AF-43EC-40E0-8B2B-390404F7B279}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{969515FF-BA83-4CFD-A072-94E256AC027A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{969515FF-BA83-4CFD-A072-94E256AC027A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{969515FF-BA83-4CFD-A072-94E256AC027A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{969515FF-BA83-4CFD-A072-94E256AC027A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A734C944-62F5-4370-AF1A-73ED9AC0B936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A734C944-62F5-4370-AF1A-73ED9AC0B936}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A734C944-62F5-4370-AF1A-73ED9AC0B936}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{754E4DB2-4592-4B42-B7AC-CB7293823558}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{754E4DB2-4592-4B42-B7AC-CB7293823558}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{754E4DB2-4592-4B42-B7AC-CB7293823558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBEF45AF-43EC-40E0-8B2B-390404F7B279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBEF45AF-43EC-40E0-8B2B-390404F7B279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBEF45AF-43EC-40E0-8B2B-390404F7B279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBEF45AF-43EC-40E0-8B2B-390404F7B279}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

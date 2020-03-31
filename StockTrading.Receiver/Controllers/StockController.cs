@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StockTrading.Receiver;
-using StockTraiding;
-using StockTraiding.Receaver.Contracts;
+using StockTrading.Receiver.Services;
 
 namespace StockTrading.Receiver.Controllers {
-    [Route("api/Reciver")]
+    [Route("api/[controller]")]
     [ApiController]
     public class StockController : ControllerBase {
-        //[HttpGet]
-        //[Route("GetAll")]
-        //public async Task<IEnumerable<StockRespons>> GetAllStocks() {
+        public readonly IStockService _stockServer;
 
-        //}
-
+        public StockController(IStockService stockService) => _stockServer = stockService;
     }
 }
