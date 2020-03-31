@@ -1,4 +1,5 @@
 ﻿using StockTrading.Receiver.Methods;
+using StockTrading.Receiver.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

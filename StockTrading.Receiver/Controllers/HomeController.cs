@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace StockTrading.Receiver.Controllers
 {
+    [Controller]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        [Route("/Home")]
+        public IActionResult Home()
         {
             return View();
         }
