@@ -6,9 +6,11 @@ namespace StockTrading.Sender.Libs.Repositories
 {
     public interface IStockTradingRepository
     {
-        Task<IEnumerable<StockDB>> GetAllItems();      
+        Task<IEnumerable<StockDB>> GetAllItems();
+        Task<StockDB> GetItem(string name);
         Task AddStock(StockDB stockDB);
         Task DeleteStock(StockDB stockDB);
         Task UpdateStock(StockDB stockDB);
+
     }
 }

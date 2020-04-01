@@ -22,6 +22,11 @@ namespace StockTrading.Sender.Services
             var response = await _stockTradingRepository.GetAllItems();
             return _mapper.ToStockContract(response);
         }
+        public async Task<StockResponse> GetItem(string name)
+        {
+            var response = await _stockTradingRepository.GetItem(name);
+            return _mapper.ToStockContract(response);
+        }
 
         public async Task AddStocks(StockRequest stockRequest)
         {
@@ -31,11 +36,18 @@ namespace StockTrading.Sender.Services
 
         }
 
-        //public async Task UpdateStock(string name, StockRequest stockRequest)
-        //{
-        //    var result = _mapper.ToStockDBModel(stockRequest.Name);
-        //    await _stockTradingRepository.UpdateStock(result);
-        //}
+        public async Task UpdateStock(StockRequest stockRequest)
+        {
+            var response = await _stockTradingRepository.GetItem(stockRequest.Name);
+            var result = _mapper.ToStockDBModel(response, stockRequest);
+
+            await _stockTradingRepository.UpdateStock(result);
+
+            //var response = _stockTradingRepository.GetItem(stockRequest.Name);
+            //var result = _mapper.ToStockDBModel(name, response, stockRequest);
+
+            //await _stockTradingRepository.UpdateStock(result);
+        }
 
     }
 }

@@ -6,12 +6,10 @@ namespace StockTrading.Sender.Mappers
 {
     public interface IMapper
     {
-
         IEnumerable<StockResponse> ToStockContract(IEnumerable<StockDB> items);
-        StockResponse ToStockDBContract(StockDB stockDB);
+        StockResponse ToStockContract(StockDB stockDB);
         StockDB ToStockDBModel(StockRequest stockDB);
-
-        StockDB ToStockDBModel(string name, StockRequest stockDB);
+        StockDB ToStockDBModel(StockDB stockDB, StockRequest stockRequest);
 
     }
 }

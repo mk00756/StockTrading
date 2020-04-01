@@ -37,6 +37,15 @@ namespace StockTrading.Sender.Controllers
             return results;
         }
 
+        [HttpGet]
+        [Route("{name}")]
+        public async Task<StockResponse> GetItem(string name)
+        {
+            var results = await _senderService.GetItem(name);
+
+            return results;
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddNewStocks([FromBody] StockRequest stockRequest)
         {
@@ -44,13 +53,13 @@ namespace StockTrading.Sender.Controllers
             return Ok();
         }
 
-        //[HttpPatch]
-        //[Route("{Name}")]
-        //public async Task<IActionResult> UpdateStock(string name, [FromBody] StockRequest stockRequest)
-        //{
-        //    await _senderService.UpdateStock(name, stockRequest);
-        //    return Ok();
-        //}
+        [HttpPatch]
+        [Route("{Name}")]
+        public async Task<IActionResult> UpdateStock([FromBody] StockRequest stockRequest)
+        {
+            await _senderService.UpdateStock(stockRequest);
+            return Ok();
+        }
     }
 }
 
