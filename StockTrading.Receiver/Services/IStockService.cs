@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace StockTrading.Receiver.Services {
     public interface IStockService {
         Task<IEnumerable<StockRespons>> GetAllItemsFromDatabase();
-        Task<StockRespons> GetMovie(string stockName);
+        Task<StockRespons> GetStockByName(string stockName);
     }
 }

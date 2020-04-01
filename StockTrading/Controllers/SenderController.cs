@@ -8,6 +8,16 @@ using StockTrading.Sender.Services;
 
 namespace StockTrading.Sender.Controllers
 {
+
+   //[Route ("sender")]
+    public class SenderController : Controller
+    {
+        private readonly ISenderService _SenderService;
+
+        public SenderController (ISenderService senderSevice)
+        {
+            _SenderService = senderSevice;
+
     [Route("stocks")]
 
     public class SenderController : Controller
@@ -27,4 +37,8 @@ namespace StockTrading.Sender.Controllers
             return results;
         }
     }
+
+    [HttpPost]
+    //[Route ("addstock")]
+    public async Task<IActionResult> AddStock(string Name, double price)
 }
