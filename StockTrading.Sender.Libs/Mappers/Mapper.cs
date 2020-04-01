@@ -1,11 +1,19 @@
-﻿using StockTrading.Sender.Models;
+﻿using StockTrading.Sender.Contracts;
+using StockTrading.Sender.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace StockTrading.Sender.Mappers {
     public class Mapper : IMapper {
-        public StockDB ToStockDBModel(StockDB stockDB)
+
+        public IEnumerable<StockResponse> ToStockContract(IEnumerable<StockDB> items)
         {
-            return new StockDB
+            return items.Select(ToStockDBContract);
+        }
+        public StockResponse ToStockDBContract(StockDB stockDB)
+        {
+            return new StockResponse
             {
                 Name = stockDB.Name,
                 Price = stockDB.Price,
