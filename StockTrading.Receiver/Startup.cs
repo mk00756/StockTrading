@@ -10,22 +10,24 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using StockTrading.Receiver.Methods;
+using StockTrading.Receiver.Repository;
+using StockTrading.Receiver.Services;
 
 namespace StockTrading.Receiver {
     public class Startup {
-        public Startup(IConfiguration configuration) {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddMvc();
             services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddControllers();
+            services.AddAWSService<IAmazonDynamoDB>();
+
+            services.AddSingleton<IStockService, StockService>();
+            services.AddSingleton<IStockRepository, StockRepository>();
+            services.AddSingleton<IMapper, Mapper>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();

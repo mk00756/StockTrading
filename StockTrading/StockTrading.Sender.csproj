@@ -5,12 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.105.19" />
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.101" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.105.19" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <ProjectReference Include="..\StockTrading.Sender.Libs\StockTrading.Sender.Libs.csproj" />
+    <ProjectReference Include="..\StockTraiding.Reciver.Contracts\StockTraiding.Reciver.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

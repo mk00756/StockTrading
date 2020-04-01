@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Amazon.DynamoDBv2;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using StockTrading.Sender.Libs.Repositories;
+using StockTrading.Sender.Mappers;
+using StockTrading.Sender.Services;
 
 namespace StockTrading
 {
@@ -26,6 +30,13 @@ namespace StockTrading
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddAWSService<IAmazonDynamoDB>();
+            services.AddSingleton<ISenderService, SenderService>();
+            services.AddSingleton<IMapper, Mapper>();
+            services.AddSingleton<IStockTradingRepository, StockTradingRepository>();
+
+
             services.AddControllers();
         }
 

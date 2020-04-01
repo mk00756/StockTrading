@@ -8,7 +8,7 @@ namespace StockTrading.Sender.Models
     {
         [DynamoDBHashKey]
         public string Name { get; set; }
-        public int Price { get; set; }
+        public float Price { get; set; }
         public string LastUpdated { get; set; }
     }
 }
