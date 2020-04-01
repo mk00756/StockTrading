@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace StockTrading.Receiver.Contracts {
-    public class StockRespons {
+    public class StockRequest {
         public string Name { get; set; }
         public string Price { get; set; }
-        public string LastUpdated { get; set; }
     }
 }

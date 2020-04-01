@@ -1,6 +1,6 @@
 ﻿using Amazon.DynamoDBv2.DocumentModel;
+using StockTrading.Receiver.Contracts;
 using StockTrading.Receiver.Models;
-using StockTraiding.Receaver.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +15,12 @@ namespace StockTrading.Receiver.Methods {
             return new StockRespons {
                 Name = items["Name"],
                 Price = items["Price"]
+            };
+        }
+        public Document ToDocumentMode(StockRequest stock) {
+            return new Document {
+                ["Name"] = stock.Name,
+                ["Price"] = stock.Price
             };
         }
     }

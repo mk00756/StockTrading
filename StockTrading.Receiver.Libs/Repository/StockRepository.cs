@@ -16,5 +16,8 @@ namespace StockTrading.Receiver.Repository {
         public async Task<Document> GetStockByName(string stockName) {
             return await _table.GetItemAsync(stockName);
         }
+        public async Task AddStock(Document documentModel) {
+            await _table.PutItemAsync(documentModel);
+        }
     }
 }

@@ -1,5 +1,5 @@
-﻿using StockTrading.Receiver.Methods;
-using StockTraiding.Receaver.Contracts;
+﻿using StockTrading.Receiver.Contracts;
+using StockTrading.Receiver.Methods;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,6 +19,10 @@ namespace StockTrading.Receiver.Services {
         public async Task<StockRespons> GetStockByName(string stockName) {
             var response = await _stockRepository.GetStockByName(stockName);
             return _mapper.ToStockContract(response);
+        }
+        public async Task AddStock(StockRequest stock) {
+            var stockIn = _mapper.ToDocumentMode(stock);
+            await _stockRepository.AddStock(stockIn);
         }
     }
 }

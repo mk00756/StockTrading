@@ -8,5 +8,6 @@ namespace StockTrading.Receiver {
     public interface IStockRepository {
         Task<IEnumerable<Document>> GetAllItems();
         Task<Document> GetStockByName(string stockName);
+        Task AddStock(Document documentModel);
     }
 }

@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 using StockTrading.Receiver.Models;
 using StockTrading.Receiver.Services;
-using StockTraiding.Receaver.Contracts;
 using Newtonsoft.Json;
 using System.Text;
 using RabbitMQ.Client.Events;
+using StockTrading.Receiver.Contracts;
 
 namespace StockTrading.Receiver.Controllers {
 
@@ -19,16 +19,14 @@ namespace StockTrading.Receiver.Controllers {
         private IModel _model;
         private IConnection _conection;
         private ConnectionFactory _factory;
-
         private const string QueueName = "QueName";
-
         public readonly IStockService _stockServer;
+
         public StockController(IStockService stockService) {
             _stockServer = stockService;
         }
 
-        private void ReceiveMessage()
-        {
+        private void ReceiveMessage() {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
@@ -41,8 +39,7 @@ namespace StockTrading.Receiver.Controllers {
                               routingKey: "");
 
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) =>
-            {
+            consumer.Received += (model, ea) => {
                 var body = ea.Body;
                 var message = Encoding.UTF8.GetString(body);
                 var stock = JsonConvert.DeserializeObject<StockDB>(message);
@@ -59,11 +56,10 @@ namespace StockTrading.Receiver.Controllers {
             var result = await _stockServer.GetAllItemsFromDatabase();
             return result;
         }
-        //[HttpGet]
-        //[Route("{StockName}")]
-        //public async Task<StockRespons> GetItemsFromDatabaseByName(string StockName) {
-        //    var result = await _stockServer.GetStockByName(StockName);
-        //    return result;
-        //}
+        [HttpPost]
+        public async Task<IActionResult> AddNewStocks([FromBody] StockRequest stockRequest) {
+            await _stockServer.AddStock(stockRequest);
+            return Ok();
+        }
     }
 }
