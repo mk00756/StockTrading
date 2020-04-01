@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace StockTrading.Sender.Mappers {
-    public class Mapper : IMapper {
+namespace StockTrading.Sender.Mappers
+{
+    public class Mapper : IMapper
+    {
 
         public IEnumerable<StockResponse> ToStockContract(IEnumerable<StockDB> items)
         {
@@ -20,7 +22,7 @@ namespace StockTrading.Sender.Mappers {
                 LastUpdated = stockDB.LastUpdated
             };
         }
-        public StockDB ToStockDBModel(string name, StockDB stockDB)
+        public StockDB ToStockDBModel(StockRequest stockDB)
         {
             return new StockDB
             {
@@ -29,5 +31,20 @@ namespace StockTrading.Sender.Mappers {
                 LastUpdated = DateTime.UtcNow.ToString()
             };
         }
+
+        public StockDB ToStockDBModel(string name, StockRequest stockDB)
+        {
+            return new StockDB
+            {
+                Name = name,
+                Price = stockDB.Price,
+                LastUpdated = DateTime.UtcNow.ToString()
+            };
+        }
+
+
+
+
     }
+
 }

@@ -8,7 +8,7 @@ using StockTrading.Sender.Contracts;
 
 namespace StockTrading.Sender.Services
 {
-    public class SenderService: ISenderService
+    public class SenderService : ISenderService
     {
         private readonly IStockTradingRepository _stockTradingRepository;
         private readonly IMapper _mapper;
@@ -17,10 +17,25 @@ namespace StockTrading.Sender.Services
             _stockTradingRepository = stockTradingRepository;
             _mapper = mapper;
         }
-        public async Task <IEnumerable<StockResponse>> GetAllFromDatabase()
+        public async Task<IEnumerable<StockResponse>> GetAllFromDatabase()
         {
             var response = await _stockTradingRepository.GetAllItems();
             return _mapper.ToStockContract(response);
         }
+
+        public async Task AddStocks(StockRequest stockRequest)
+        {
+            var response = _mapper.ToStockDBModel(stockRequest);
+
+            await _stockTradingRepository.AddStock(response);
+
+        }
+
+        //public async Task UpdateStock(string name, StockRequest stockRequest)
+        //{
+        //    var result = _mapper.ToStockDBModel(stockRequest.Name);
+        //    await _stockTradingRepository.UpdateStock(result);
+        //}
+
     }
 }

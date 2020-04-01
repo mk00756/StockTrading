@@ -28,7 +28,7 @@ namespace StockTrading.Sender.Controllers
         {
             _senderService = senderService;
         }
-               
+
         [HttpGet]
         public async Task<IEnumerable<StockResponse>> GetAllFromDatabase()
         {
@@ -36,9 +36,24 @@ namespace StockTrading.Sender.Controllers
 
             return results;
         }
-    }
 
-    //[HttpPost]
-    ////[Route ("addstock")]
-    //public async Task<IActionResult> AddStock(string Name, double price)
+        [HttpPost]
+        public async Task<IActionResult> AddNewStocks([FromBody] StockRequest stockRequest)
+        {
+            await _senderService.AddStocks(stockRequest);
+            return Ok();
+        }
+
+        //[HttpPatch]
+        //[Route("{Name}")]
+        //public async Task<IActionResult> UpdateStock(string name, [FromBody] StockRequest stockRequest)
+        //{
+        //    await _senderService.UpdateStock(name, stockRequest);
+        //    return Ok();
+        //}
+    }
 }
+
+//[HttpPost]
+////[Route ("addstock")]
+//public async Task<IActionResult> AddStock(string Name, double price)
