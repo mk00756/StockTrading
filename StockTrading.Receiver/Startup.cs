@@ -32,7 +32,6 @@ namespace StockTrading.Receiver {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseMvc();
         }
     }
