@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RabbitMQ.Client;
-using StockTrading.Sender.Models;
+using StockTrading.Sender.Libs.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +12,12 @@ namespace StockTrading.Sender.Libs.MessageBroker
         private static ConnectionFactory _factory;
         private static IConnection _connection;
         private static IModel _model;
+
+        private const string ExchangeName = "Topic_Exchange";
+        private const string AllQueueName = "AllTopic_Queue";
+        private const string RoutingKey = "";
+
+
 
         public RabbitMQClient()
         {
@@ -29,7 +35,9 @@ namespace StockTrading.Sender.Libs.MessageBroker
 
             _connection = _factory.CreateConnection();
             _model = _connection.CreateModel();
-            _model.ExchangeDeclare(exchange:"stocks", type:ExchangeType.Fanout);
+
+            _model.ExchangeDeclare(exchange: "stocks", type: ExchangeType.Fanout);
+
 
         }
 
@@ -41,7 +49,10 @@ namespace StockTrading.Sender.Libs.MessageBroker
 
         public void SendMessage(byte[] message)
         {
-            _model.BasicPublish(exchange: "stocks", "", null, message);
+            _model.BasicPublish(exchange: "stocks",
+                                 routingKey: "",
+                                 basicProperties: null,
+                                 body: message);
         }
 
         private static byte[] Serialize(StockDB stockDB)
