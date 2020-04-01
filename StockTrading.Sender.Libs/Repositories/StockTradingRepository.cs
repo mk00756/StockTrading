@@ -1,7 +1,7 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using StockTrading.Sender.Libs.MessageBroker;
-using StockTrading.Sender.Models;
+using StockTrading.Sender.Libs.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

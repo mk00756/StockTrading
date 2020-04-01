@@ -1,5 +1,5 @@
 ﻿using StockTrading.Sender.Contracts;
-using StockTrading.Sender.Models;
+using StockTrading.Sender.Libs.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
