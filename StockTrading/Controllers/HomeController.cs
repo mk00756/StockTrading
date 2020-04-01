@@ -6,8 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace StockTrading.Sender.Controllers
 {
-    public class SenderController : Controller
+    [Controller]
+    public class HomeController : Controller
     {
-	//a comment
+        [Route("/Home")]
+        public IActionResult Home()
+        {
+            return View();
+        }
     }
 }

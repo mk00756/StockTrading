@@ -19,6 +19,7 @@ namespace StockTrading.Receiver {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+<<<<<<< HEAD
             services.AddMvc();
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddAWSService<IAmazonDynamoDB>();
@@ -26,6 +27,10 @@ namespace StockTrading.Receiver {
             services.AddSingleton<IStockService, StockService>();
             services.AddSingleton<IStockRepository, StockRepository>();
             services.AddSingleton<IMapper, Mapper>();
+=======
+            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddControllers();
+>>>>>>> master
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
