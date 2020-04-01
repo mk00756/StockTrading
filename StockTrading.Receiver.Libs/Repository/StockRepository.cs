@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockTrading.Receiver.Repository {
     public class StockRepository : IStockRepository {
-        private const string TableName = "StockTracking";
+        private const string TableName = "StockTraderReceaver";
         private readonly Table _table;
         public StockRepository(IAmazonDynamoDB dynamoDbCleint) => _table = Table.LoadTable(dynamoDbCleint, TableName);
         public async Task<IEnumerable<Document>> GetAllItems() {

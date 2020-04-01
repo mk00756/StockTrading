@@ -11,9 +11,9 @@ namespace StockTrading.Sender.Mappers
 
         public IEnumerable<StockResponse> ToStockContract(IEnumerable<StockDB> items)
         {
-            return items.Select(ToStockDBContract);
+            return items.Select(ToStockContract);
         }
-        public StockResponse ToStockDBContract(StockDB stockDB)
+        public StockResponse ToStockContract(StockDB stockDB)
         {
             return new StockResponse
             {
@@ -22,6 +22,7 @@ namespace StockTrading.Sender.Mappers
                 LastUpdated = stockDB.LastUpdated
             };
         }
+
         public StockDB ToStockDBModel(StockRequest stockDB)
         {
             return new StockDB
@@ -32,12 +33,12 @@ namespace StockTrading.Sender.Mappers
             };
         }
 
-        public StockDB ToStockDBModel(string name, StockRequest stockDB)
+        public StockDB ToStockDBModel(StockDB stockDB, StockRequest stockRequest)
         {
             return new StockDB
             {
-                Name = name,
-                Price = stockDB.Price,
+                Name = stockDB.Name,
+                Price = stockRequest.Price,
                 LastUpdated = DateTime.UtcNow.ToString()
             };
         }

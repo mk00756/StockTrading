@@ -20,6 +20,10 @@ namespace StockTrading.Sender.Libs.Repositories
             return await _context.ScanAsync<StockDB>(new List<ScanCondition>()).GetRemainingAsync();
         }
 
+        public async Task<StockDB> GetItem(string name)
+        {
+            return await _context.LoadAsync<StockDB>(name);
+        }
         public async Task AddStock(StockDB stockDB)
         {
 
@@ -29,7 +33,6 @@ namespace StockTrading.Sender.Libs.Repositories
             sendMQ.SendStock(stockDB);
             
         }
-
         public async Task DeleteStock(StockDB stockDB)
         {
             await _context.DeleteAsync(stockDB);
