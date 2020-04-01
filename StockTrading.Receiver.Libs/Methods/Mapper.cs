@@ -17,9 +17,9 @@ namespace StockTrading.Receiver.Methods {
                 Price = items["Price"]
             };
         }
-        public Document ToDocumentMode(StockRequest stock) {
+        public Document ToDocumentMode(string StockName, StockRequest stock) {
             return new Document {
-                ["Name"] = stock.Name,
+                ["Name"] = StockName,
                 ["Price"] = stock.Price
             };
         }

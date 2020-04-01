@@ -25,7 +25,6 @@ namespace StockTrading.Receiver.Controllers {
         public StockController(IStockService stockService) {
             _stockServer = stockService;
         }
-
         private void ReceiveMessage() {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using var connection = factory.CreateConnection();
@@ -50,15 +49,15 @@ namespace StockTrading.Receiver.Controllers {
                                  autoAck: true,
                                  consumer: consumer);
         }
-
         [HttpGet]
         public async Task<IEnumerable<StockRespons>> GetAllItemsFromDatabase() {
             var result = await _stockServer.GetAllItemsFromDatabase();
             return result;
         }
         [HttpPost]
-        public async Task<IActionResult> AddNewStocks([FromBody] StockRequest stockRequest) {
-            await _stockServer.AddStock(stockRequest);
+        [Route("{StockName}")]
+        public async Task<IActionResult> AddNewStocks(string StockName, [FromBody] StockRequest stockRequest) {
+            await _stockServer.AddStock(StockName, stockRequest);
             return Ok();
         }
     }
