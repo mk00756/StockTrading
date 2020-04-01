@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StockTrading.Sender.Contracts;
 using StockTrading.Sender.Services;
+using StockTraiding.Receaver.Contracts;
 
 namespace StockTrading.Sender.Controllers
 {
@@ -14,9 +15,10 @@ namespace StockTrading.Sender.Controllers
     {
         private readonly ISenderService _SenderService;
 
-        public SenderController (ISenderService senderSevice)
+        public SenderController(ISenderService senderSevice)
         {
             _SenderService = senderSevice;
+        }
 
     [Route("stocks")]
 
