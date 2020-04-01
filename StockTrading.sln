@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockTrading.Sender.Libs", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockTrading.Receiver.Libs", "StockTrading.Receiver.Libs\StockTrading.Receiver.Libs.csproj", "{02CF5F26-6C37-49BC-9895-E2FB0FB28E4D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockTraiding.Reciver.Contracts", "StockTraiding.Reciver.Contracts\StockTraiding.Reciver.Contracts.csproj", "{754E4DB2-4592-4B42-B7AC-CB7293823558}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockTrading.Receiver.Contracts", "StockTraiding.Reciver.Contracts\StockTrading.Receiver.Contracts.csproj", "{754E4DB2-4592-4B42-B7AC-CB7293823558}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockTrading.Receiver", "StockTrading.Receiver\StockTrading.Receiver.csproj", "{EBEF45AF-43EC-40E0-8B2B-390404F7B279}"
 EndProject

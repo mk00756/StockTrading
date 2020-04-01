@@ -1,6 +1,6 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
 
-namespace StockTrading.Sender.Models
+namespace StockTrading.Sender.Libs.Models
 {
     [DynamoDBTable("StockTracking")]
 

@@ -20,7 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\StockTrading.Receiver.Libs\StockTrading.Receiver.Libs.csproj" />
     <ProjectReference Include="..\StockTrading.Sender.Libs\StockTrading.Sender.Libs.csproj" />
-    <ProjectReference Include="..\StockTraiding.Reciver.Contracts\StockTraiding.Reciver.Contracts.csproj" />
+    <ProjectReference Include="..\StockTraiding.Reciver.Contracts\StockTrading.Receiver.Contracts.csproj" />
   </ItemGroup>
 
 
