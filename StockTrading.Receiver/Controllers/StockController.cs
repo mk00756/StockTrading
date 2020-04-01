@@ -8,6 +8,7 @@ using StockTrading.Receiver.Services;
 using StockTraiding.Receaver.Contracts;
 using Newtonsoft.Json;
 using System.Text;
+using RabbitMQ.Client.Events;
 
 namespace StockTrading.Receiver.Controllers {
 
@@ -24,36 +25,33 @@ namespace StockTrading.Receiver.Controllers {
         public readonly IStockService _stockServer;
         public StockController(IStockService stockService) {
             _stockServer = stockService;
-            ReceaveMesages();
         }
 
-        private void ReceaveMesages() {
-            var consumer = new QueueingBasicConsumer(_model);
-            var msgCount = GetMessageCount(_model, QueueName);
+        private void ReceiveMessage()
+        {
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+            using var connection = factory.CreateConnection();
+            using var channel = connection.CreateModel();
 
-            _model.BasicConsume(QueueName, true, consumer);
+            channel.ExchangeDeclare(exchange: "stocks", type: ExchangeType.Fanout);
 
-            var count = 0;
+            var queueName = channel.QueueDeclare().QueueName;
+            channel.QueueBind(queue: queueName,
+                              exchange: "stocks",
+                              routingKey: "");
 
-            while (count < msgCount) {
-                var mesage = (StockDB)consumer.Queue.Dequeue().Body.DeSerialize(typeof(StockDB));
-                count++;
-            }
-        }
+            var consumer = new EventingBasicConsumer(channel);
+            consumer.Received += (model, ea) =>
+            {
+                var body = ea.Body;
+                var message = Encoding.UTF8.GetString(body);
+                var stock = JsonConvert.DeserializeObject<StockDB>(message);
+                // TODO: Further process the message
 
-        private static uint GetMessageCount(IModel chanel, string queueName) {
-            var result = chanel.QueueDeclare(queueName, true, false, false, null);
-            return result.MessageCount;
-        }
-
-        private object DesSerialize(this byte[] arrBytes, Type type) {
-            var jason = Encoding.Default.GetString(arrBytes);
-            return JsonConverter.DeserilizeObject(jason,
-                                                  type);
-        }
-
-        public string DesrializeText(this byte[] arrBytes) {
-            return Encoding.Default.GetString(arrBytes);
+            };
+            channel.BasicConsume(queue: queueName,
+                                 autoAck: true,
+                                 consumer: consumer);
         }
 
         [HttpGet]
