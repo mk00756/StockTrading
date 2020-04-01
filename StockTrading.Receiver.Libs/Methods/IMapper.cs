@@ -9,5 +9,6 @@ using System.Threading.Tasks;
 namespace StockTrading.Receiver.Methods {
     public interface IMapper {
         IEnumerable<StockRespons> ToStockContract(IEnumerable<Document> Items);
+        StockRespons ToStockContract(Document items);
     }
 }

@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace StockTrading.Receiver {
     public interface IStockRepository {
         Task<IEnumerable<Document>> GetAllItems();
+        Task<Document> GetStockByName(string stockName);
     }
 }

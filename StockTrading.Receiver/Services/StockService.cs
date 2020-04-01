@@ -16,5 +16,9 @@ namespace StockTrading.Receiver.Services {
             var response = await _stockRepository.GetAllItems();
             return _mapper.ToStockContract(response);
         }
+        public async Task<StockRespons> GetMovie(string stockName) {
+            var response = await _stockRepository.GetStockByName(stockName);
+            return _mapper.ToStockContract(response);
+        }
     }
 }
