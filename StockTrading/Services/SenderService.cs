@@ -43,10 +43,12 @@ namespace StockTrading.Sender.Services
 
             await _stockTradingRepository.UpdateStock(result);
 
-            //var response = _stockTradingRepository.GetItem(stockRequest.Name);
-            //var result = _mapper.ToStockDBModel(name, response, stockRequest);
+        }
 
-            //await _stockTradingRepository.UpdateStock(result);
+        public async Task RemoveStock(string name)
+        {
+            var response = await _stockTradingRepository.GetItem(name);
+            await _stockTradingRepository.DeleteStock(response);
         }
 
     }

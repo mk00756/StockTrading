@@ -10,6 +10,6 @@ namespace StockTrading.Sender.Services
         Task<StockResponse> GetItem(string name);
         Task AddStocks(StockRequest stockRequest);
         Task UpdateStock(StockRequest stockRequest);
-
-    }
+        Task RemoveStock(string name);
+        }
 }

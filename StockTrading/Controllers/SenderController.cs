@@ -8,18 +8,7 @@ using StockTrading.Sender.Services;
 
 namespace StockTrading.Sender.Controllers
 {
-
-   //[Route ("sender")]
-    //public class SenderController : Controller
-    //{
-    //    private readonly ISenderService _SenderService;
-
-    //    public SenderController (ISenderService senderSevice)
-    //    {
-    //        _SenderService = senderSevice;
-
     [Route("stocks")]
-
     public class SenderController : Controller
     {
         private readonly ISenderService _senderService;
@@ -53,6 +42,7 @@ namespace StockTrading.Sender.Controllers
             return Ok();
         }
 
+
         [HttpPatch]
         [Route("{Name}")]
         public async Task<IActionResult> UpdateStock([FromBody] StockRequest stockRequest)
@@ -60,9 +50,14 @@ namespace StockTrading.Sender.Controllers
             await _senderService.UpdateStock(stockRequest);
             return Ok();
         }
+
+        [HttpDelete]
+        [Route("{name}")]
+        public async Task<IActionResult> RemoveStock(string name)
+        {
+            await _senderService.RemoveStock(name);
+            return Ok();
+
+        }
     }
 }
-
-//[HttpPost]
-////[Route ("addstock")]
-//public async Task<IActionResult> AddStock(string Name, double price)
