@@ -5,20 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StockTrading.Sender.Contracts;
 using StockTrading.Sender.Services;
-using StockTraiding.Receaver.Contracts;
 
 namespace StockTrading.Sender.Controllers
 {
 
    //[Route ("sender")]
-    public class SenderController : Controller
-    {
-        private readonly ISenderService _SenderService;
+    //public class SenderController : Controller
+    //{
+    //    private readonly ISenderService _SenderService;
 
-        public SenderController(ISenderService senderSevice)
-        {
-            _SenderService = senderSevice;
-        }
+    //    public SenderController (ISenderService senderSevice)
+    //    {
+    //        _SenderService = senderSevice;
 
     [Route("stocks")]
 
@@ -40,7 +38,7 @@ namespace StockTrading.Sender.Controllers
         }
     }
 
-    [HttpPost]
-    //[Route ("addstock")]
-    public async Task<IActionResult> AddStock(string Name, double price)
+    //[HttpPost]
+    ////[Route ("addstock")]
+    //public async Task<IActionResult> AddStock(string Name, double price)
 }
