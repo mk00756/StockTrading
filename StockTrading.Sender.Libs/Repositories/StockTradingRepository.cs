@@ -29,8 +29,8 @@ namespace StockTrading.Sender.Libs.Repositories
 
             await _context.SaveAsync(stockDB);
 
-            SendMQ sendMQ = new SendMQ();
-            sendMQ.SendStock(stockDB);
+            RabbitMQClient client = new RabbitMQClient();
+            client.SendMethod(stockDB);
             
         }
         public async Task DeleteStock(StockDB stockDB)
