@@ -14,9 +14,8 @@ namespace StockTrading.Receiver.Methods {
         public StockRespons ToStockContract(Document items) {
             return new StockRespons {
                 Name = items["Name"],
-                Price = Convert.ToInt32(items["Price"])
+                Price = items["Price"]
             };
         }
-
     }
 }

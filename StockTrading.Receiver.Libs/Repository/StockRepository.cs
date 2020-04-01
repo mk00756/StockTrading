@@ -13,5 +13,8 @@ namespace StockTrading.Receiver.Repository {
             var config = new ScanOperationConfig();
             return await _table.Scan(config).GetRemainingAsync();
         }
+        public async Task<Document> GetStockByName(string stockName) {
+            return await _table.GetItemAsync(stockName);
+        }
     }
 }
