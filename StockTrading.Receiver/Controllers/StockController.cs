@@ -15,11 +15,11 @@ namespace StockTrading.Receiver.Controllers {
             var result = await _stockServer.GetAllItemsFromDatabase();
             return result;
         }
-        [HttpGet]
-        [Route("{StockName}")]
-        public async Task<IEnumerable<StockRespons>> GetItemsFromDatabaseByName() {
-            var result = await _stockServer.GetAllItemsFromDatabase();
-            return result;
-        }
+        //[HttpGet]
+        //[Route("{StockName}")]
+        //public async Task<StockRespons> GetItemsFromDatabaseByName(string StockName) {
+        //    var result = await _stockServer.GetStockByName(StockName);
+        //    return result;
+        //}
     }
 }

@@ -15,11 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StockTrading.Receiver.Libs\StockTrading.Receiver.Libs.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\StockTrading.Receiver.Libs\StockTrading.Receiver.Libs.csproj" />
-    <ProjectReference Include="..\StockTrading.Sender.Libs\StockTrading.Sender.Libs.csproj" />
     <ProjectReference Include="..\StockTraiding.Reciver.Contracts\StockTraiding.Reciver.Contracts.csproj" />
   </ItemGroup>
 
