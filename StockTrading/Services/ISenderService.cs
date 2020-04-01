@@ -9,6 +9,6 @@ namespace StockTrading.Sender.Services
         Task<IEnumerable<StockResponse>> GetAllFromDatabase();
         Task AddStocks(StockRequest stockRequest);
         //Task UpdateStock(string name, StockRequest stockRequest);
-
+        Task RemoveStock(string name);
     }
 }

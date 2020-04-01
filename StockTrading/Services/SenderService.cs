@@ -37,5 +37,10 @@ namespace StockTrading.Sender.Services
         //    await _stockTradingRepository.UpdateStock(result);
         //}
 
+        public async Task RemoveStock(string name)
+        {
+
+        }
+
     }
 }
