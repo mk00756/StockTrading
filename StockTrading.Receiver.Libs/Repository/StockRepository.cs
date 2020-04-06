@@ -19,5 +19,9 @@ namespace StockTrading.Receiver.Repository {
         public async Task AddStock(Document documentModel) {
             await _table.PutItemAsync(documentModel);
         }
+        public async Task DeleteStock(Document documentModel)
+        {
+            await _table.DeleteItemAsync(documentModel);
+        }
     }
 }

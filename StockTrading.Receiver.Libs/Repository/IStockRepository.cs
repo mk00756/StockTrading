@@ -9,5 +9,7 @@ namespace StockTrading.Receiver {
         Task<IEnumerable<Document>> GetAllItems();
         Task<Document> GetStockByName(string stockName);
         Task AddStock(Document documentModel);
+        Task DeleteStock(Document documentModel);
+
     }
 }

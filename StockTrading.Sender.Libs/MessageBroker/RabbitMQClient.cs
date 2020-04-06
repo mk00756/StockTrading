@@ -14,10 +14,8 @@ namespace StockTrading.Sender.Libs.MessageBroker
         private static IModel _model;
 
         private const string ExchangeName = "Topic_Exchange";
-        private string QueueName = "AllTopic_Queue";
+        private string QueueName = "";
         private string RoutingKey = "";
-
-
 
         public RabbitMQClient(string queueName, string routingKey)
         {

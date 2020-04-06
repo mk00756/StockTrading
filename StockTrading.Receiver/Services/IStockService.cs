@@ -9,5 +9,6 @@ namespace StockTrading.Receiver.Services {
         Task<IEnumerable<StockRespons>> GetAllItemsFromDatabase();
         Task<StockRespons> GetStockByName(string stockName);
         Task AddStock(StockRespons stock);
+        Task DeleteStock(StockRespons stock);
     }
 }

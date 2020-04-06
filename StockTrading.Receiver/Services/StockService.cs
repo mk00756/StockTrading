@@ -20,9 +20,22 @@ namespace StockTrading.Receiver.Services {
             var response = await _stockRepository.GetStockByName(stockName);
             return _mapper.ToStockContract(response);
         }
-        public async Task AddStock(StockRespons stock) {
+        public async Task AddStock(StockRespons stock)
+        {
             var stockIn = _mapper.ToDocumentMode(stock);
             await _stockRepository.AddStock(stockIn);
         }
+
+        public async Task DeleteStock(StockRespons stock)
+        {
+            var stockIn = _mapper.ToDocumentMode(stock);
+            await _stockRepository.DeleteStock(stockIn);
+        }
+
+        //public async Task UpdateStock(StockRespons stock)
+        //{
+        //    var stockIn = _mapper.ToDocumentMode(stock);
+        //    await _stockRepository.UpdateStock(stockIn);
+        //}
     }
 }

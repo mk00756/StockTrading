@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Text;
 using RabbitMQ.Client.Events;
 using StockTrading.Receiver.Contracts;
+using StockTrading.Receiver.MessageBroker;
 
 namespace StockTrading.Receiver.Controllers {
 
@@ -20,30 +21,8 @@ namespace StockTrading.Receiver.Controllers {
 
         public StockController(IStockService stockService) {
             _stockServer = stockService;
-            ReceiveMessage();
         }
-        private void ReceiveMessage() {
-            //Vreates the conmection
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            using var connection = factory.CreateConnection();
-            using var channel = connection.CreateModel();
-            channel.ExchangeDeclare(exchange: "stocks", type: ExchangeType.Fanout);
-            var queueName = channel.QueueDeclare().QueueName;
-            channel.QueueBind(queue: queueName,exchange: "stocks",routingKey: "");
-            var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += async (model, ea) => {
-                var body = ea.Body;
-                var message = Encoding.UTF8.GetString(body);
-                var stock = JsonConvert.DeserializeObject<StockDB>(message);
-                var newStock = new StockRespons {
-                    Name = stock.Name,
-                    Price = Convert.ToInt32(stock.Price)
-                };
-                await PostFromRabbitMQ(newStock);
 
-            };
-            channel.BasicConsume(queue:queueName,autoAck: true,consumer:consumer);
-        }
         [HttpGet]
         public async Task<IEnumerable<StockRespons>> GetAllItemsFromDatabase() {
             var result = await _stockServer.GetAllItemsFromDatabase();
@@ -59,6 +38,35 @@ namespace StockTrading.Receiver.Controllers {
         [HttpPost]
         public async Task<IActionResult> AddNewStocks([FromBody] StockRespons stockRequest) {
             await _stockServer.AddStock(stockRequest);
+            return Ok();
+        }
+
+
+
+        [HttpGet]
+        [Route("/add")]
+        public async Task<IActionResult> AddStock(string id)
+        {
+            //var result = await _stockServer.GetAllItemsFromDatabase();
+
+            AddConsumer receive = new AddConsumer(_stockServer);
+            receive.CreateConnection();
+            await receive.ReceiveMessage();
+            receive.Close();
+
+
+            return Ok();
+        }
+        [HttpGet]
+        [Route("/delete")]
+        public async Task<IActionResult> DeleteStock(string id)
+        {
+            //var result = await _stockServer.GetAllItemsFromDatabase();
+            DeleteConsumer receive = new DeleteConsumer(_stockServer);
+            receive.CreateConnection();
+            await receive.ReceiveMessage();
+            receive.Close();
+
             return Ok();
         }
     }
