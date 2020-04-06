@@ -14,7 +14,7 @@ namespace StockTrading.Receiver.Methods {
         public StockRespons ToStockContract(Document items) {
             return new StockRespons {
                 Name = items["Name"],
-                Price = items["Price"],
+                Price = items["Price"].AsDouble(),
                 LastUpdated = items["LastUpdated"]
             };
         }
@@ -22,7 +22,7 @@ namespace StockTrading.Receiver.Methods {
             return new Document {
                 ["Name"] = stock.Name,
                 ["Price"] = stock.Price,
-                ["LastUpdated"] = stock.LastUpdated
+                ["LastUpdated"] = DateTime.UtcNow.ToString()
             };
         }
     }

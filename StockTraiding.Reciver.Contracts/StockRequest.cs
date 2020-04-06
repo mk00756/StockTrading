@@ -5,6 +5,6 @@ using System.Text;
 namespace StockTrading.Receiver.Contracts {
     public class StockRequest {
         public string Name { get; set; }
-        public float Price { get; set; }
+        public double Price { get; set; }
     }
 }

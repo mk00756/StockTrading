@@ -13,7 +13,7 @@ namespace StockTrading.Receiver.MessageBroker
 {
     public class ReceiveMQ
     {
-        private readonly IStockService _stockService;
+        private readonly IStockService _stockServer;
 
         private static ConnectionFactory _factory;
         private static IConnection _connection;
@@ -22,7 +22,10 @@ namespace StockTrading.Receiver.MessageBroker
         private const string ExchangeName = "Topic_Exchange";
         private const string AllQueueName = "AllTopic_Queue";
 
-
+        public ReceiveMQ(IStockService stockService)
+        {
+            _stockServer = stockService;
+        }
         public void CreateConnection()
         {
             _factory = new ConnectionFactory { HostName = "localhost", UserName = "guest", Password = "guest" };
@@ -69,7 +72,7 @@ namespace StockTrading.Receiver.MessageBroker
 
         public async Task ConsumeMessage([FromBody] StockRespons stock)
         {
-            await _stockService.AddStock(stock);
+            await _stockServer.AddStock(stock);
 
         }
 

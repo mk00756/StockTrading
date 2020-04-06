@@ -52,15 +52,15 @@ namespace StockTrading.Receiver.Controllers {
             };
         }
         [HttpGet]
-        public string GetAllItemsFromDatabase() {
+        public async Task<IActionResult> GetAllItemsFromDatabase() {
             //var result = await _stockServer.GetAllItemsFromDatabase();
-            ReceiveMQ receive = new ReceiveMQ();
+            ReceiveMQ receive = new ReceiveMQ(_stockServer);
             receive.CreateConnection();
-            receive.ReceiveMessage();
+            await receive.ReceiveMessage();
             receive.Close();
 
 
-            return returnMessage;
+            return Ok();
         }
 
         ////Posts from RabbitMQ
