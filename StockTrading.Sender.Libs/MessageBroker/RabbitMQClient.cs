@@ -14,17 +14,19 @@ namespace StockTrading.Sender.Libs.MessageBroker
         private static IModel _model;
 
         private const string ExchangeName = "Topic_Exchange";
-        private const string AllQueueName = "AllTopic_Queue";
-        private const string RoutingKey = "";
+        private string QueueName = "AllTopic_Queue";
+        private string RoutingKey = "";
 
 
 
-        public RabbitMQClient()
+        public RabbitMQClient(string queueName, string routingKey)
         {
-            CreateConnection();
+            QueueName = queueName;
+            RoutingKey = routingKey;
+            CreateConnection(queueName, routingKey);
         }
 
-        private static void CreateConnection()
+        private static void CreateConnection(string queueName, string routingKey)
         {
             _factory = new ConnectionFactory
             {
@@ -36,17 +38,16 @@ namespace StockTrading.Sender.Libs.MessageBroker
             _connection = _factory.CreateConnection();
             _model = _connection.CreateModel();
             _model.ExchangeDeclare(ExchangeName, "topic");
-            _model.QueueDeclare(AllQueueName, true, false, false, null);
+            _model.QueueDeclare(queueName, true, false, false, null);
 
-            _model.QueueBind(AllQueueName, ExchangeName, "stock.add");
+            _model.QueueBind(queueName, ExchangeName, routingKey);
 
 
         }
 
-        public void SendMethod(StockDB stockDB)
+        public void SendMethod(StockDB stockDB, string routingKey)
         {
-            SendMessage(Serialize(stockDB),"stock.add");
-
+            SendMessage(Serialize(stockDB), routingKey);
         }
 
         public void SendMessage(byte[] message, string routingKey)

@@ -29,8 +29,8 @@ namespace StockTrading.Sender.Libs.Repositories
 
             //await _context.SaveAsync(stockDB);
 
-            RabbitMQClient client = new RabbitMQClient();
-            client.SendMethod(stockDB);
+            RabbitMQClient client = new RabbitMQClient("Add_Queue", "stock.add");
+            client.SendMethod(stockDB, "stock.add");
             
         }
         public async Task DeleteStock(StockDB stockDB)
@@ -39,7 +39,10 @@ namespace StockTrading.Sender.Libs.Repositories
         }
         public async Task UpdateStock(StockDB stockDB)
         {
-            await _context.SaveAsync(stockDB);
+            //await _context.SaveAsync(stockDB);
+
+            RabbitMQClient client = new RabbitMQClient("Patch_Queue", "stock.patch");
+            client.SendMethod(stockDB, "stock.patch");
         }
     }
 }
