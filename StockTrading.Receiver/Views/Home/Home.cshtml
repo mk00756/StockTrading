@@ -7,10 +7,45 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Stock Trading Receaver</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        var cars = ["Saab", "Volvo", "BMW"];
+        google.charts.load('current', { 'packages': ['line'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Day');
+            var x;
+            for (x of cars) {
+                data.addColumn('number', x);
+            }
+            for (var i = 0; i < 50; i++) {
+                data.addRows([
+                    [i, Math.random(), Math.random(), Math.random()]
+                ]);
+            }
+            
+            var options = {
+                chart: {
+                    title: 'Test Line Graph',
+                    subtitle: 'Test for the line graph'
+                },
+                width: 900,
+                height: 500,
+                axes: {
+                    x: {
+                        0: { side: 'top' }
+                    }
+                }
+            };
+
+            var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+            chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+    </script>
 </head>
 <body>
-    <h1>Stock Trading Receaver App</h1>
+    <div id="line_top_x"></div>
 </body>
 </html>
