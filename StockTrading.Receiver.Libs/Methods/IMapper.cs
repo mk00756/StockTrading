@@ -10,6 +10,6 @@ namespace StockTrading.Receiver.Methods {
     public interface IMapper {
         IEnumerable<StockRespons> ToStockContract(IEnumerable<Document> Items);
         StockRespons ToStockContract(Document items);
-        Document ToDocumentMode(string StockName, StockRequest stock);
+        Document ToDocumentMode(StockRequest stock);
     }
 }

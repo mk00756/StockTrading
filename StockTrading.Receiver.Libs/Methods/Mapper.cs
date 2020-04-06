@@ -14,13 +14,15 @@ namespace StockTrading.Receiver.Methods {
         public StockRespons ToStockContract(Document items) {
             return new StockRespons {
                 Name = items["Name"],
-                Price = items["Price"]
+                Price = items["Price"],
+                LastUpdated = items["LastUpdated"]
             };
         }
-        public Document ToDocumentMode(string StockName, StockRequest stock) {
+        public Document ToDocumentMode(StockRequest stock) {
             return new Document {
-                ["Name"] = StockName,
-                ["Price"] = stock.Price
+                ["Name"] = stock.Name,
+                ["Price"] = stock.Price,
+                ["LastUpdated"] = DateTime.UtcNow
             };
         }
     }

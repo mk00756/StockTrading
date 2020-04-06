@@ -20,8 +20,8 @@ namespace StockTrading.Receiver.Services {
             var response = await _stockRepository.GetStockByName(stockName);
             return _mapper.ToStockContract(response);
         }
-        public async Task AddStock(string StockName, StockRequest stock) {
-            var stockIn = _mapper.ToDocumentMode(StockName, stock);
+        public async Task AddStock(StockRequest stock) {
+            var stockIn = _mapper.ToDocumentMode(stock);
             await _stockRepository.AddStock(stockIn);
         }
     }
