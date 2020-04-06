@@ -18,11 +18,11 @@ namespace StockTrading.Receiver.Methods {
                 LastUpdated = items["LastUpdated"]
             };
         }
-        public Document ToDocumentMode(StockRequest stock) {
+        public Document ToDocumentMode(StockRespons stock) {
             return new Document {
                 ["Name"] = stock.Name,
                 ["Price"] = stock.Price,
-                ["LastUpdated"] = DateTime.UtcNow
+                ["LastUpdated"] = stock.LastUpdated
             };
         }
     }

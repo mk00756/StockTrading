@@ -27,7 +27,7 @@ namespace StockTrading.Sender.Libs.Repositories
         public async Task AddStock(StockDB stockDB)
         {
 
-            await _context.SaveAsync(stockDB);
+            //await _context.SaveAsync(stockDB);
 
             RabbitMQClient client = new RabbitMQClient();
             client.SendMethod(stockDB);

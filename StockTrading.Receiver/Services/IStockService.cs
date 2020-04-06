@@ -8,6 +8,6 @@ namespace StockTrading.Receiver.Services {
     public interface IStockService {
         Task<IEnumerable<StockRespons>> GetAllItemsFromDatabase();
         Task<StockRespons> GetStockByName(string stockName);
-        Task AddStock(StockRequest stock);
+        Task AddStock(StockRespons stock);
     }
 }
