@@ -35,22 +35,25 @@ namespace StockTrading.Sender.Libs.MessageBroker
 
             _connection = _factory.CreateConnection();
             _model = _connection.CreateModel();
+            _model.ExchangeDeclare(ExchangeName, "topic");
+            _model.QueueDeclare(AllQueueName, true, false, false, null);
 
-            _model.ExchangeDeclare(exchange: "stocks", type: ExchangeType.Fanout);
+            _model.QueueBind(AllQueueName, ExchangeName, "stock.add");
 
 
         }
 
         public void SendMethod(StockDB stockDB)
         {
-            SendMessage(Serialize(stockDB));
+            SendMessage(Serialize(stockDB),"stock.add");
 
         }
 
-        public void SendMessage(byte[] message)
+        public void SendMessage(byte[] message, string routingKey)
         {
-            _model.BasicPublish(exchange: "stocks",
-                                 routingKey: "",
+
+            _model.BasicPublish(exchange: ExchangeName,
+                                 routingKey: routingKey,
                                  basicProperties: null,
                                  body: message);
         }
