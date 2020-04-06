@@ -25,5 +25,15 @@ namespace StockTrading.Receiver.Methods {
                 ["LastUpdated"] = DateTime.UtcNow.ToString()
             };
         }
+
+        public Document ToDocument(StockRespons stock)
+        {
+            return new Document
+            {
+                ["Name"] = stock.Name,
+                ["Price"] = stock.Price,
+                ["LastUpdated"] = stock.LastUpdated
+            };
+        }
     }
 }

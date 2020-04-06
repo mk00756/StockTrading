@@ -45,7 +45,7 @@ namespace StockTrading.Receiver.Controllers {
 
         [HttpGet]
         [Route("/add")]
-        public async Task<IActionResult> AddStock(string id)
+        public async Task<IActionResult> AddStock()
         {
             //var result = await _stockServer.GetAllItemsFromDatabase();
 
@@ -58,8 +58,20 @@ namespace StockTrading.Receiver.Controllers {
             return Ok();
         }
         [HttpGet]
+        [Route("/update")]
+        public async Task<IActionResult> UpdateStock()
+        {
+            //var result = await _stockServer.GetAllItemsFromDatabase();
+            UpdateConsumer receive = new UpdateConsumer(_stockServer);
+            receive.CreateConnection();
+            await receive.ReceiveMessage();
+            receive.Close();
+
+            return Ok();
+        }
+        [HttpGet]
         [Route("/delete")]
-        public async Task<IActionResult> DeleteStock(string id)
+        public async Task<IActionResult> DeleteStock()
         {
             //var result = await _stockServer.GetAllItemsFromDatabase();
             DeleteConsumer receive = new DeleteConsumer(_stockServer);

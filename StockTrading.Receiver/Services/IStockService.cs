@@ -10,5 +10,7 @@ namespace StockTrading.Receiver.Services {
         Task<StockRespons> GetStockByName(string stockName);
         Task AddStock(StockRespons stock);
         Task DeleteStock(StockRespons stock);
+        Task UpdateStock(StockRespons stock);
+
     }
 }

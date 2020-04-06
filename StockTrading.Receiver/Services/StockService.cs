@@ -32,10 +32,10 @@ namespace StockTrading.Receiver.Services {
             await _stockRepository.DeleteStock(stockIn);
         }
 
-        //public async Task UpdateStock(StockRespons stock)
-        //{
-        //    var stockIn = _mapper.ToDocumentMode(stock);
-        //    await _stockRepository.UpdateStock(stockIn);
-        //}
+        public async Task UpdateStock(StockRespons stock)
+        {
+            var stockIn = _mapper.ToDocument(stock);
+            await _stockRepository.UpdateStock(stockIn);
+        }
     }
 }

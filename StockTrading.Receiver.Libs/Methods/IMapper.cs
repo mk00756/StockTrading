@@ -11,5 +11,7 @@ namespace StockTrading.Receiver.Methods {
         IEnumerable<StockRespons> ToStockContract(IEnumerable<Document> Items);
         StockRespons ToStockContract(Document items);
         Document ToDocumentMode(StockRespons stock);
+        Document ToDocument(StockRespons stock);
+
     }
 }

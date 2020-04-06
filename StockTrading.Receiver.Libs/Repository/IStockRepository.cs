@@ -10,6 +10,8 @@ namespace StockTrading.Receiver {
         Task<Document> GetStockByName(string stockName);
         Task AddStock(Document documentModel);
         Task DeleteStock(Document documentModel);
+        Task UpdateStock(Document documentModel);
+
 
     }
 }
