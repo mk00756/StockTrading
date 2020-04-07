@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.MessagePatterns;
+using StockTrading.Receiver.Consumers;
 using StockTrading.Receiver.Contracts;
 using StockTrading.Receiver.Models;
 using StockTrading.Receiver.Services;
@@ -11,14 +12,13 @@ using System.Threading.Tasks;
 
 namespace StockTrading.Receiver.MessageBroker
 {
-    public class AddConsumer
+    public class AddConsumer: IConsumer
     {
         private readonly IStockService _stockServer;
 
         private static ConnectionFactory _factory;
         private static IConnection _connection;
-
-
+        
         private const string ExchangeName = "Topic_Exchange";
         private const string AllQueueName = "Add_Queue";
 
@@ -37,39 +37,44 @@ namespace StockTrading.Receiver.MessageBroker
             _connection.Close();
         }
 
-        public async Task ReceiveMessage()
+        public void ReceiveMessage()
         {
             using (_connection = _factory.CreateConnection())
             {
                 using (var channel = _connection.CreateModel())
                 {
+                    // create and declare queue
                     channel.ExchangeDeclare(ExchangeName, "topic");
                     channel.QueueDeclare(AllQueueName, true, false, false, null);
                     channel.QueueBind(AllQueueName, ExchangeName, "stock.add");
+                    BasicGetResult status = channel.BasicGet(AllQueueName, false);
+                    
+                    //channel.BasicQos(0, 10, false);
+                    Subscription subscription = new Subscription(channel, AllQueueName,true);
 
+                    //read from queue until no messages left
+                    while (status !=null)
+                    {
+                        BasicDeliverEventArgs deliveryArguments = subscription.Next();
 
-                    channel.BasicQos(0, 10, false);
-                    Subscription subscription = new Subscription(channel, AllQueueName, false);
+                        var body = deliveryArguments.Body;
+                        var message = Encoding.UTF8.GetString(body);
+                        var stock = JsonConvert.DeserializeObject<StockRespons>(message);
 
+                        subscription.Ack(deliveryArguments);
 
-                    BasicDeliverEventArgs deliveryArguments = subscription.Next();
+                        // perform operation
+                        ConsumeMessage(stock);
 
-                    var body = deliveryArguments.Body;
-                    var message = Encoding.UTF8.GetString(body);
-                    var stock = JsonConvert.DeserializeObject<StockRespons>(message);
-                    //returnMessage = stock.ToString();
-
-                    subscription.Ack(deliveryArguments);
-
-                    await ConsumeMessage(stock);
+                    }
                 }
 
             }
         }
 
-        public async Task ConsumeMessage([FromBody] StockRespons stock)
+        public void ConsumeMessage([FromBody] StockRespons stock)
         {
-            await _stockServer.AddStock(stock);
+             _stockServer.AddStock(stock);
         }
     }
 }
