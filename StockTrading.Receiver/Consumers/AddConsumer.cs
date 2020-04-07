@@ -53,7 +53,7 @@ namespace StockTrading.Receiver.MessageBroker
                     Subscription subscription = new Subscription(channel, AllQueueName,true);
 
                     //read from queue until no messages left
-                    while (status !=null)
+                    while (true)
                     {
                         BasicDeliverEventArgs deliveryArguments = subscription.Next();
 
