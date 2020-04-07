@@ -33,6 +33,8 @@ namespace StockTrading.Sender.Libs.MessageBroker
                 Password = "guest"
             };
 
+            // create and declare queue with route and queue name
+
             _connection = _factory.CreateConnection();
             _model = _connection.CreateModel();
             _model.ExchangeDeclare(ExchangeName, "topic");
@@ -59,6 +61,7 @@ namespace StockTrading.Sender.Libs.MessageBroker
 
         private static byte[] Serialize(StockDB stockDB)
         {
+            // serialize the object to send to rabbitMQ
             var jsonified = JsonConvert.SerializeObject(stockDB);
             return Encoding.ASCII.GetBytes(jsonified);
 

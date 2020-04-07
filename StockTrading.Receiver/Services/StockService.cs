@@ -22,13 +22,13 @@ namespace StockTrading.Receiver.Services {
         }
         public async Task AddStock(StockRespons stock)
         {
-            var stockIn = _mapper.ToDocumentMode(stock);
+            var stockIn = _mapper.ToDocument(stock);
             await _stockRepository.AddStock(stockIn);
         }
 
         public async Task DeleteStock(StockRespons stock)
         {
-            var stockIn = _mapper.ToDocumentMode(stock);
+            var stockIn = _mapper.ToDocument(stock);
             await _stockRepository.DeleteStock(stockIn);
         }
 
