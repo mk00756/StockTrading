@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AngularJS.Core" Version="1.7.9" />
     <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.105.19" />
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.101" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
@@ -13,6 +14,10 @@
   <ItemGroup>
     <ProjectReference Include="..\StockTrading.Sender.Libs\StockTrading.Sender.Libs.csproj" />
     <ProjectReference Include="..\StockTraiding.Reciver.Contracts\StockTrading.Receiver.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scripts\" />
   </ItemGroup>
 
 </Project>
