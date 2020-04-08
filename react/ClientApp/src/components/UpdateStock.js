@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 
 export class UpdateStock extends Component {
-    static displayName = 'Update Stocks';
+    static displayName = UpdateStock.name;
 
 
 

@@ -19,6 +19,7 @@ export class Home extends Component {
                     <tr>
                         <th>Name</th>
                         <th>Price</th>
+                        <th>Last Updated</th>
                     </tr>
                 </thead>
                 <tbody>
