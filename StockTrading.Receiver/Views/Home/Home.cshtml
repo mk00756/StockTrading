@@ -7,56 +7,93 @@
     <head>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
-            var cars = ["Saab", "Volvo", "BMW"];
-            google.charts.load('current', { 'packages': ['line'] });
-            google.charts.setOnLoadCallback(drawChart);
-
+            google.charts.load('current', { packages: ['corechart', 'bar'] });
+            google.charts.setOnLoadCallback(drawStuff);
+            //class
+            class Stock {
+                constructor(Name, Price) {
+                    this.name = Name;
+                    this.price = Price;
+                }
+            }
+            //list
+            var StockList = [];
+            //Gets the data
             function UserAction() {
+                //Gets dat from the table
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        alert(this.responseText);
+                        var result = xhttp.responseText;
+                        //Removes squer brakets
+                        result = result.replace("[", "");
+                        result = result.replace("]", "");
+                        //Splits the data
+                        var splitData = result.split("},{");
+                        for (var i = 0; i < splitData.length; i++) {
+                            //Remmoves braces
+                            splitData[i] = splitData[i].replace("{", "");
+                            splitData[i] = splitData[i].replace("}", "");
+                            CreateStock(splitData[i], i);
+                            drawStuff();
+                        }
                     }
                 };
                 xhttp.open("GET", "http://localhost:55236/Reciver", true);
                 xhttp.send();
-                var result = xhttp;
-                alert(result);
-                drawChart();
+            }
+            //Creates a stock
+            function CreateStock(Data, index) {
+                //Splits the data
+                var SplitData = Data.split(",");
+                var nameData = SplitData[0].split(":")[1];
+                var PriceData = SplitData[1].split(":")[1];
+                //Creates the stock
+                var stock = new Stock(nameData, PriceData);
+                //Adds it to the list
+                StockList[index] = stock;
             }
 
-            function drawChart() {
+            //Draws the table
+            function drawStuff() {
+                //Ifd the list is empty
+                if (StockList.length <= 0) UserAction();
                 var data = new google.visualization.DataTable();
-                data.addColumn('number', 'Day');
-                var x;
-                for (x of cars) {
-                    data.addColumn('number', x);
-                }
-                for (var i = 0; i <= 50; i++) {
+                //Adds the colums
+                data.addColumn('string', 'Stock Name');
+                data.addColumn('number', 'Stock Value');
+                data.addColumn({ type: 'string', role: 'annotation' });
+                //Adds data to the table
+                for (var i = 0; i < StockList.length; i++) {
                     data.addRows([
-                        [i, Math.random(), Math.random(), Math.random()]
+                        [{ v: StockList[i].name, f: StockList[i].name }, Number(StockList[i].price), StockList[i].price]
                     ]);
                 }
+                //Sets the options
                 var options = {
+                    width: 800,
+                    legend: { position: 'none' },
                     chart: {
-                        title: 'Test Line Graph',
-                        subtitle: 'Test for the line graph'
+                        title: 'Stock Values',
+                        subtitle: 'A chart showing the values of all of the stocks'
                     },
-                    width: 900,
-                    height: 500,
                     axes: {
                         x: {
-                            0: { side: 'top' }
+                            0: { side: 'bottom', label: 'Stocks By Value' } // Top x-axis.
                         }
-                    }
+                    },
+                    bar: { groupWidth: "90%" }
                 };
-                var chart = new google.charts.Line(document.getElementById('line_top_x'));
-                chart.draw(data, google.charts.Line.convertOptions(options));
-            }
+
+                var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+                // Convert the Classic options to Material options.
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+            };
         </script>
     </head>
     <body>
-        <div id="line_top_x"></div>
-        <button type="submit" onclick="UserAction()">Search</button>
+        <h1>Stock Trader Receaver</h1>
+        <div id="top_x_div" style="width: 800px; height: 600px;"></div>
+        <input id="clickMe" type="button" value="Refresh Chart" onclick="UserAction();" />
     </body>
 </html>
