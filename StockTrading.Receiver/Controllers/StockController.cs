@@ -19,7 +19,6 @@ namespace StockTrading.Receiver.Controllers {
         public StockController(IStockService stockService) {
             _stockServer = stockService;
 
-
             //// initialise each consumer
             //AddConsumer add = new AddConsumer(_stockServer);
             //DeleteConsumer delete = new DeleteConsumer(_stockServer);
@@ -44,6 +43,13 @@ namespace StockTrading.Receiver.Controllers {
         [HttpGet]
         public async Task<IEnumerable<StockRespons>> GetAllItemsFromDatabase() {
             var result = await _stockServer.GetAllItemsFromDatabase();
+            return result;
+        }
+
+        [HttpGet]
+        [Route("{name}")]
+        public async Task<StockRespons> GetStockByNameItem(string name) {
+            var result = await _stockServer.GetStockByName(name);
             return result;
         }
 
