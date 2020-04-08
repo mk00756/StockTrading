@@ -30,7 +30,7 @@ namespace StockTrading.Receiver.Repository {
 
         public async Task UpdateStock(Document documentModel)
         {
-            await _table.PutItemAsync(documentModel);
+            await _table.UpdateItemAsync(documentModel);
         }
     }
 }

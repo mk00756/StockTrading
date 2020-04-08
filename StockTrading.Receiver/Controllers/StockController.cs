@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using StockTrading.Receiver.Services;
 using StockTrading.Receiver.Contracts;
 using StockTrading.Receiver.MessageBroker;
+using StockTrading.Receiver.Consumers;
+using System.Threading;
 
 namespace StockTrading.Receiver.Controllers {
 
-    [Route("Reciver")]
+    [Route("Receiver")]
     [ApiController]
     public class StockController : ControllerBase {
 
@@ -16,6 +18,27 @@ namespace StockTrading.Receiver.Controllers {
 
         public StockController(IStockService stockService) {
             _stockServer = stockService;
+
+
+            //// initialise each consumer
+            //AddConsumer add = new AddConsumer(_stockServer);
+            //DeleteConsumer delete = new DeleteConsumer(_stockServer);
+            //UpdateConsumer update = new UpdateConsumer(_stockServer);
+
+            //// initialise each thread
+            //Thread addThread = new Thread(new ThreadStart(add.ReceiveMessage));
+            //Thread deleteThread = new Thread(new ThreadStart(delete.ReceiveMessage));
+            //Thread updateThread = new Thread(new ThreadStart(update.ReceiveMessage));
+
+            //// start each receiving connection to the queue
+            //add.CreateConnection();
+            //delete.CreateConnection();
+            //update.CreateConnection();
+
+            //// start each thread
+            //addThread.Start();
+            //deleteThread.Start();
+            //updateThread.Start();
         }
 
         [HttpGet]
@@ -38,43 +61,41 @@ namespace StockTrading.Receiver.Controllers {
 
 
 
-        [HttpGet]
-        [Route("/add")]
-        public async Task<IActionResult> AddStock()
-        {
-            //var result = await _stockServer.GetAllItemsFromDatabase();
+        //[HttpGet]
+        //[Route("/add")]
+        //public async Task<IActionResult> AddStock()
+        //{
+        //    var result = await _stockServer.GetAllItemsFromDatabase();
 
-            AddConsumer receive = new AddConsumer(_stockServer);
-            receive.CreateConnection();
-            await receive.ReceiveMessage();
-            receive.Close();
+        //    AddConsumer receive = new AddConsumer(_stockServer);
+        //    receive.CreateConnection();
+        //    receive.ReceiveMessage();
 
+        //    return Ok();
+        //}
+        //[HttpGet]
+        //[Route("/update")]
+        //public async Task<IActionResult> UpdateStock()
+        //{
+        //    var result = await _stockServer.GetAllItemsFromDatabase();
+        //    UpdateConsumer receive = new UpdateConsumer(_stockServer);
+        //    receive.CreateConnection();
+        //    receive.ReceiveMessage();
+        //    receive.Close();
 
-            return Ok();
-        }
-        [HttpGet]
-        [Route("/update")]
-        public async Task<IActionResult> UpdateStock()
-        {
-            //var result = await _stockServer.GetAllItemsFromDatabase();
-            UpdateConsumer receive = new UpdateConsumer(_stockServer);
-            receive.CreateConnection();
-            await receive.ReceiveMessage();
-            receive.Close();
+        //    return Ok();
+        //}
+        //[HttpGet]
+        //[Route("/delete")]
+        //public async Task<IActionResult> DeleteStock()
+        //{
+        //    var result = await _stockServer.GetAllItemsFromDatabase();
+        //    DeleteConsumer delete = new DeleteConsumer(_stockServer);
+        //    delete.CreateConnection();
+        //    delete.ReceiveMessage();
+        //    delete.Close();
 
-            return Ok();
-        }
-        [HttpGet]
-        [Route("/delete")]
-        public async Task<IActionResult> DeleteStock()
-        {
-            //var result = await _stockServer.GetAllItemsFromDatabase();
-            DeleteConsumer receive = new DeleteConsumer(_stockServer);
-            receive.CreateConnection();
-            await receive.ReceiveMessage();
-            receive.Close();
-
-            return Ok();
-        }
+        //    return Ok();
+        //}
     }
 }
