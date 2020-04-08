@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RabbitMQ.Client;
-using StockTrading.Receiver.Models;
 using StockTrading.Receiver.Services;
-using Newtonsoft.Json;
-using System.Text;
-using RabbitMQ.Client.Events;
 using StockTrading.Receiver.Contracts;
 using StockTrading.Receiver.MessageBroker;
 
