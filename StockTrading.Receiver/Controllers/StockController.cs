@@ -19,26 +19,6 @@ namespace StockTrading.Receiver.Controllers {
         public StockController(IStockService stockService) {
             _stockServer = stockService;
 
-            // initialise each consumer
-            AddConsumer add = new AddConsumer(_stockServer);
-            DeleteConsumer delete = new DeleteConsumer(_stockServer);
-            UpdateConsumer update = new UpdateConsumer(_stockServer);
-
-            // initialise each thread
-            Thread addThread = new Thread(new ThreadStart(add.ReceiveMessage));
-            Thread deleteThread = new Thread(new ThreadStart(delete.ReceiveMessage));
-            Thread updateThread = new Thread(new ThreadStart(update.ReceiveMessage));
-
-            // start each receiving connection to the queue
-            add.CreateConnection();
-            delete.CreateConnection();
-            update.CreateConnection();
-
-            // start each thread
-            addThread.Start();
-            deleteThread.Start();
-            updateThread.Start();
-
         }
 
         [HttpGet]
