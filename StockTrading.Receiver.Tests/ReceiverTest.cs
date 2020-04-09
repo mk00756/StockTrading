@@ -16,17 +16,21 @@ namespace StockTrading.Receiver.Tests
         {
             // Arrange
             string currentTime = System.DateTime.Now.ToString();
-            var item = new Document();
-            item["Name"] = "STOCK";
-            item["Price"] = 123.45f;
-            item["LastUpdated"] = currentTime;
+            var item = new Document
+            {
+                ["Name"] = "STOCK",
+                ["Price"] = 123.45f,
+                ["LastUpdated"] = currentTime
+            };
 
             var mapper = new Mapper();
 
-            StockRespons expectedResponse = new StockRespons();
-            expectedResponse.Name = "STOCK";
-            expectedResponse.Price = 123.45f;
-            expectedResponse.LastUpdated = currentTime;
+            StockRespons expectedResponse = new StockRespons
+            {
+                Name = "STOCK",
+                Price = 123.45f,
+                LastUpdated = currentTime
+            };
 
             StockRespons result;
 
@@ -45,15 +49,19 @@ namespace StockTrading.Receiver.Tests
             // Arrange
             string currentTime = System.DateTime.Now.ToString();
 
-            StockRespons stockResponse = new StockRespons();
-            stockResponse.Name = "STOCK";
-            stockResponse.Price = 123.45f;
-            stockResponse.LastUpdated = currentTime;
+            StockRespons stockResponse = new StockRespons
+            {
+                Name = "STOCK",
+                Price = 123.45f,
+                LastUpdated = currentTime
+            };
 
-            var expectedDocument = new Document();
-            expectedDocument["Name"] = "STOCK";
-            expectedDocument["Price"] = 123.45f;
-            expectedDocument["LastUpdated"] = currentTime;
+            var expectedDocument = new Document
+            {
+                ["Name"] = "STOCK",
+                ["Price"] = 123.45f,
+                ["LastUpdated"] = currentTime
+            };
 
             var mapper = new Mapper();
 
@@ -98,9 +106,11 @@ namespace StockTrading.Receiver.Tests
             expectedItem2.Price = 111.11f;
             expectedItem2.LastUpdated = currentTime;
 
-            List<StockRespons> expectedItemList = new List<StockRespons>();
-            expectedItemList.Add(expectedItem1);
-            expectedItemList.Add(expectedItem2);
+            List<StockRespons> expectedItemList = new List<StockRespons>
+            {
+                expectedItem1,
+                expectedItem2
+            };
 
             var mapper = new Mapper();
 
