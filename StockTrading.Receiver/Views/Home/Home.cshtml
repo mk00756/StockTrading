@@ -4,166 +4,171 @@
 }
 <!DOCTYPE html>
 <html>
-    <head>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            google.charts.load('current', { packages: ['corechart', 'bar'] });
-            google.charts.setOnLoadCallback(drawStuff);
-            var serchSting = "http://localhost:55236/Receiver";
-            //class
-            class Stock {
-                constructor(Name, Price, LU) {
-                    this.name = Name;
-                    this.price = Price;
-                    this.lu = LU
-                }
+<head>
+    <title>Stock Trader Receiver - Home</title>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart', 'bar'] });
+        google.charts.setOnLoadCallback(drawStuff);
+        var serchSting = "http://localhost:55236/Receiver";
+        //class
+        class Stock {
+            constructor(Name, Price, LU) {
+                this.name = Name;
+                this.price = Price;
+                this.lu = LU
             }
-            //list
-            var StockList = [];
-            //Gets the data
-            function UserAction() {
-                //Clears strocklist
-                StockList = [];
-                //Gets dat from the table
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var result = xhttp.responseText;
-                        //Removes squer brakets
-                        result = result.replace("[", "");
-                        result = result.replace("]", "");
-                        //Splits the data
-                        var splitData = result.split("},{");
-                        for (var i = 0; i < splitData.length; i++) {
-                            //Remmoves braces
-                            splitData[i] = splitData[i].replace("{", "");
-                            splitData[i] = splitData[i].replace("}", "");
-                            CreateStock(splitData[i], i);
-                        }
-                        if (StockList.length > 0) {
-                            //Changes the data in the table
-                            ChangeDataInTable();
-                            //Draws the graph
-                            drawStuff();
-                        }
+        }
+        //list
+        var StockList = [];
+        //Gets the data
+        function UserAction() {
+            //Clears strocklist
+            StockList = [];
+            //Gets dat from the table
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var result = xhttp.responseText;
+                    //Removes squer brakets
+                    result = result.replace("[", "");
+                    result = result.replace("]", "");
+                    //Splits the data
+                    var splitData = result.split("},{");
+                    for (var i = 0; i < splitData.length; i++) {
+                        //Remmoves braces
+                        splitData[i] = splitData[i].replace("{", "");
+                        splitData[i] = splitData[i].replace("}", "");
+                        CreateStock(splitData[i], i);
                     }
-                };
-                xhttp.open("GET", serchSting, true);
-                xhttp.send();
-            }
-
-            function UserActionSerch() {
-                //Clears strocklist
-                StockList = [];
-                //Gets dat from the table
-                var newSerchString = serchSting + "/" + document.getElementById("stockName").value;
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var result = xhttp.responseText;
-                        //Removes squer brakets
-                        result = result.replace("[", "");
-                        result = result.replace("]", "");
-                        //Splits the data
-                        var splitData = result.split("},{");
-                        for (var i = 0; i < splitData.length; i++) {
-                            //Remmoves braces
-                            splitData[i] = splitData[i].replace("{", "");
-                            splitData[i] = splitData[i].replace("}", "");
-                            CreateStock(splitData[i], i);
-                            //Changes the data in the table
-                            ChangeDataInTable();
-                        }
+                    if (StockList.length > 0) {
+                        //Changes the data in the table
+                        ChangeDataInTable();
+                        //Draws the graph
+                        drawStuff();
                     }
-                };
-                xhttp.open("GET", newSerchString, true);
-                xhttp.send();
-                
-            }
-
-            function ChangeDataInTable() {
-                var table = document.getElementById("StockTable");
-                var oRows = document.getElementById('StockTable').getElementsByTagName('tr');
-                //reomes alll of the rows
-                while (oRows.length > 1) {
-                    document.getElementById("StockTable").deleteRow(1);
                 }
-                for (var i = 0; i < StockList.length; i++) {
-                    //creates a row and adds the cels individualy
-                    var row = table.insertRow(1);
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(0);
-                    var cell3 = row.insertCell(0);
-                    cell1.innerHTML = StockList[i].lu;
-                    cell2.innerHTML = StockList[i].price;
-                    cell3.innerHTML = StockList[i].name;
-                }
-            }
-            
-
-            //Creates a stock
-            function CreateStock(Data, index) {
-                //Splits the data
-                var SplitData = Data.split(",");
-                var nameData = SplitData[0].split(":")[1];
-                var newName = "";
-                //Reomes the "
-                for (var i = 1; i < nameData.length - 1; i++) newName += nameData[i];
-                var PriceData = SplitData[1].split(":")[1];
-                var lu = SplitData[2].split(":")[1];
-                var newLU = "";
-                //Reomes the "
-                for (var i = 1; i < lu.length; i++) newLU += lu[i];
-                //Creates the stock
-                var stock = new Stock(newName, PriceData, newLU);
-                //Adds it to the list
-                StockList[index] = stock;
-            }
-
-            //Draws the table
-            function drawStuff() {
-                //Ifd the list is empty
-                var data = new google.visualization.DataTable();
-                //Adds the colums
-                data.addColumn('string', 'Stock Name');
-                data.addColumn('number', 'Stock Value');
-                data.addColumn({ type: 'string', role: 'annotation' });
-                //Adds data to the table
-                for (var i = 0; i < StockList.length; i++) {
-                    data.addRows([
-                        [{ v: StockList[i].name, f: StockList[i].name }, Number(StockList[i].price), StockList[i].price]
-                    ]);
-                }
-                //Sets the options
-                var options = {
-                    width: 800,
-                    legend: { position: 'none' },
-                    chart: {
-                        title: 'Stock Values',
-                        subtitle: 'A chart showing the values of all of the stocks'
-                    },
-                    axes: {
-                        x: {
-                            0: { side: 'bottom', label: 'Stocks By Value' } // Top x-axis.
-                        }
-                    },
-                    bar: { groupWidth: "90%" }
-                };
-
-                var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-                // Convert the Classic options to Material options.
-                chart.draw(data, google.charts.Bar.convertOptions(options));
             };
-        </script>
-    </head>
+            xhttp.open("GET", serchSting, true);
+            xhttp.send();
+        }
+
+        function UserActionSerch() {
+            //Clears strocklist
+            StockList = [];
+            //Gets dat from the table
+            var newSerchString = serchSting + "/" + document.getElementById("stockName").value;
+            document.getElementById("SubTitle").innerHTML = "Showing results for " + document.getElementById("stockName").value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var result = xhttp.responseText;
+                    //Removes squer brakets
+                    result = result.replace("[", "");
+                    result = result.replace("]", "");
+                    //Splits the data
+                    var splitData = result.split("},{");
+                    for (var i = 0; i < splitData.length; i++) {
+                        //Remmoves braces
+                        splitData[i] = splitData[i].replace("{", "");
+                        splitData[i] = splitData[i].replace("}", "");
+                        CreateStock(splitData[i], i);
+                        //Changes the data in the table
+                        ChangeDataInTable();
+                    }
+                }
+            };
+            xhttp.open("GET", newSerchString, true);
+            xhttp.send();
+
+        }
+
+        function ChangeDataInTable() {
+            var table = document.getElementById("StockTable");
+            var oRows = document.getElementById('StockTable').getElementsByTagName('tr');
+            //reomes alll of the rows
+            while (oRows.length > 1) {
+                document.getElementById("StockTable").deleteRow(1);
+            }
+            for (var i = 0; i < StockList.length; i++) {
+                //creates a row and adds the cels individualy
+                var row = table.insertRow(1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(0);
+                var cell3 = row.insertCell(0);
+                cell1.innerHTML = StockList[i].lu;
+                cell2.innerHTML = StockList[i].price;
+                cell3.innerHTML = StockList[i].name;
+                cell1.innerHTML.name = "TestName";
+            }
+        }
+
+
+        //Creates a stock
+        function CreateStock(Data, index) {
+            //Splits the data
+            var SplitData = Data.split(",");
+            var nameData = SplitData[0].split(":")[1];
+            var newName = "";
+            //Reomes the "
+            for (var i = 1; i < nameData.length - 1; i++) newName += nameData[i];
+            var PriceData = SplitData[1].split(":")[1];
+            var lu = SplitData[2].split(":")[1];
+            var newLU = "";
+            //Reomes the "
+            for (var i = 1; i < lu.length; i++) newLU += lu[i];
+            //Creates the stock
+            var stock = new Stock(newName, PriceData, newLU);
+            //Adds it to the list
+            StockList[index] = stock;
+        }
+
+        //Draws the table
+        function drawStuff() {
+            //Ifd the list is empty
+            var data = new google.visualization.DataTable();
+            //Adds the colums
+            data.addColumn('string', 'Stock Name');
+            data.addColumn('number', 'Stock Value');
+            data.addColumn({ type: 'string', role: 'annotation' });
+            //Adds data to the table
+            for (var i = 0; i < StockList.length; i++) {
+                data.addRows([
+                    [{ v: StockList[i].name, f: StockList[i].name }, Number(StockList[i].price), StockList[i].price]
+                ]);
+            }
+            //Sets the options
+            var options = {
+                width: 800,
+                legend: { position: 'none' },
+                chart: {
+                    title: 'Stock Values',
+                    subtitle: 'A chart showing the values of all of the stocks'
+                },
+                axes: {
+                    x: {
+                        0: { side: 'bottom', label: 'Stocks By Value' } // Top x-axis.
+                    }
+                },
+                bar: { groupWidth: "90%" }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('StockValueBarChart'));
+            // Convert the Classic options to Material options.
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        };
+    </script>
+
+</head>
     <body>
         <h1>Stock Trader Receaver</h1>
-        <div id="top_x_div" style="width: 800px; height: 600px;"></div>
-        <input id="clickMe" type="button" value="Refresh Chart" onclick="UserAction();" />
+        <div id="StockValueBarChart" style="width: 800px; height: 600px;"></div>
+        <input id="RefreshButton" type="button" value="Refresh Chart" onclick="UserAction();" />
         <h2>List Of Stocks</h2>
-        Setch For Stock
-        <input id="serchButton" type="button" value="Serch" onclick="UserActionSerch();"/>
-        <input type="text" id="stockName" name="Sname"/>
+        <div id="SubTitle">Setch For Stock</div>
+        <input id="serchButton" type="button" value="Serch" onclick="UserActionSerch();" />
+        <input type="text" id="stockName" name="Sname" />
         <table id="StockTable">
             <tr>
                 <th>Stock Name</th>
