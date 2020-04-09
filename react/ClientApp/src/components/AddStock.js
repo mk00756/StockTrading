@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import '../Styles/ComponentStyle.css';
 
 export class AddStock extends Component {
     static displayName = AddStock.name;
@@ -33,40 +34,46 @@ export class AddStock extends Component {
             .then(response => response.json())
             .then(data => this.setState({ postId: data.id }));
     }
-    
+
 
 
     render() {
 
         return (
-           <React.Fragment >
+            <React.Fragment >
 
-            <h1> Stock name and price is : {this.state.stockName} {this.state.stockPrice} </h1>
+                <h1> Add Stock</h1>
+                <form>
+                    <div className="form-group">
 
-            <form className="form-inline" onSubmit={this.onSubmit}>
-                <label htmlFor="stockName">Stock Name </label>
-                <input
-                    type="text"
-                    name="stockName"
-                    placeholder="FTSE"
-                    value={this.state.stockName}
-                    onChange={this.handleChange}
-                />
+                        <label htmlFor="stockName">Stock Name </label>
+                        <input
+                            type="text"
+                            name="stockName"
+                            placeholder="FTSE"
+                            value={this.state.stockName}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
 
-                <label htmlFor="stockPrice">Stock Price </label>
-                <input
-                    type="number"
-                    placeholder="4000"
-                    name="stockPrice"
-                    value={this.state.stockPrice}
-                    onChange={this.handleChange}
-                />
-                <button
-                    type="submit"
-                    className="btn btn-primary"
-                    onClick={this.addNewStock}>Add
+                        <label htmlFor="stockPrice">Stock Price </label>
+                        <input
+                            type="number"
+                            placeholder="4000"
+                            name="stockPrice"
+                            value={this.state.stockPrice}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <button
+                            type="submit"
+                            className="btn btn-primary"
+                            onClick={this.addNewStock}>Add
                         </button>
-            </form>
+                    </div>
+                </form>
             </React.Fragment>
         );
     }
