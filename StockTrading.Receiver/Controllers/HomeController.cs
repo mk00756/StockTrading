@@ -1,6 +1,5 @@
-<<<<<<< HEAD
+
 ﻿using Microsoft.AspNetCore.Mvc;
-=======
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StockTrading.Receiver.MessageBroker;
 using StockTrading.Receiver.Services;
->>>>>>> testbranch
+
 
 namespace StockTrading.Receiver.Controllers {
     [Controller]
