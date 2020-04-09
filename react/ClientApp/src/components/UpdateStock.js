@@ -33,9 +33,7 @@ export class UpdateStock extends Component {
             .then(response => response.json())
             .then(data => this.setState({ postId: data.id }));
     }
-
-
-
+       
     render() {
         return (
             <React.Fragment>
@@ -62,7 +60,6 @@ export class UpdateStock extends Component {
                         />
                     </div>
 
-
                     <div className="form-group">
 
                         <button
@@ -71,9 +68,6 @@ export class UpdateStock extends Component {
                             onClick={this.PatchStock}>Update Price
                         </button>
                     </div>
-
-
-
                 </form>
             </React.Fragment>
         );

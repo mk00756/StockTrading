@@ -13,8 +13,6 @@ export class AddStock extends Component {
         this.setState({ [target.name]: target.value });
     };
 
-
-
     // POST method is executed on button click
     addNewStock = () => {
         var name = this.state.stockName;
@@ -34,8 +32,6 @@ export class AddStock extends Component {
             .then(response => response.json())
             .then(data => this.setState({ postId: data.id }));
     }
-
-
 
     render() {
 

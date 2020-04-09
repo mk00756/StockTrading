@@ -15,13 +15,9 @@ export class DeleteStock extends Component {
     // DELETE method is executed on button click
     deleteStock = () => {
         var name = this.state.stockName;
-        var price = parseInt(this.state.stockPrice);
-
-        var value = { "name": name, "price": price };
-
 
         // DELETE Method
-        fetch('stock' + this.state.stockName, { method: 'DELETE', })
+        fetch('stock/' + name, { method: 'DELETE', })
             .then(response => response.json())
             .then(data => this.setState({ postId: data.id }));
     }
@@ -31,21 +27,26 @@ export class DeleteStock extends Component {
             <React.Fragment >
                 <h1>Delete stocks</h1>
 
-                <form className="form-inline" onSubmit={this.onSubmit}>
-                    <label htmlFor="stockName">Stock Name </label>
-                    <input
-                        type="text"
-                        name="stockName"
-                        placeholder="FTSE"
-                        value={this.state.stockName}
-                        onChange={this.handleChange}
-                    />
+                <form>
+                    <div className="form-group">
 
-                    <button
-                        type="submit"
-                        className="btn btn-primary"
-                        onClick={this.deleteStock}> Remove this stock
+                        <label htmlFor="stockName">Stock Name </label>
+                        <input
+                            type="text"
+                            name="stockName"
+                            placeholder="FTSE"
+                            value={this.state.stockName}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+
+                        <button
+                            type="submit"
+                            className="btn btn-primary"
+                            onClick={this.deleteStock}> Remove Stock
                     </button>
+                    </div>
                 </form>
             </React.Fragment>
         );
