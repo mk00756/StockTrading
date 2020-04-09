@@ -34,7 +34,7 @@ namespace StockTrading.Sender.Libs.Repositories
 
             // save to dynamoDB
             await _context.SaveAsync(stockDB);
-            
+
         }
         public async Task DeleteStock(StockDB stockDB)
         {

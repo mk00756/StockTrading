@@ -19,7 +19,6 @@ namespace StockTrading.Receiver.Controllers {
         public StockController(IStockService stockService) {
             _stockServer = stockService;
 
-
             // initialise each consumer
             AddConsumer add = new AddConsumer(_stockServer);
             DeleteConsumer delete = new DeleteConsumer(_stockServer);
@@ -39,6 +38,7 @@ namespace StockTrading.Receiver.Controllers {
             addThread.Start();
             deleteThread.Start();
             updateThread.Start();
+			
         }
 
         [HttpGet]
@@ -59,43 +59,5 @@ namespace StockTrading.Receiver.Controllers {
             return Ok();
         }
 
-
-
-        //[HttpGet]
-        //[Route("/add")]
-        //public async Task<IActionResult> AddStock()
-        //{
-        //    var result = await _stockServer.GetAllItemsFromDatabase();
-
-        //    AddConsumer receive = new AddConsumer(_stockServer);
-        //    receive.CreateConnection();
-        //    receive.ReceiveMessage();
-
-        //    return Ok();
-        //}
-        //[HttpGet]
-        //[Route("/update")]
-        //public async Task<IActionResult> UpdateStock()
-        //{
-        //    var result = await _stockServer.GetAllItemsFromDatabase();
-        //    UpdateConsumer receive = new UpdateConsumer(_stockServer);
-        //    receive.CreateConnection();
-        //    receive.ReceiveMessage();
-        //    receive.Close();
-
-        //    return Ok();
-        //}
-        //[HttpGet]
-        //[Route("/delete")]
-        //public async Task<IActionResult> DeleteStock()
-        //{
-        //    var result = await _stockServer.GetAllItemsFromDatabase();
-        //    DeleteConsumer delete = new DeleteConsumer(_stockServer);
-        //    delete.CreateConnection();
-        //    delete.ReceiveMessage();
-        //    delete.Close();
-
-        //    return Ok();
-        //}
     }
 }
