@@ -16,7 +16,7 @@ export class UpdateStock extends Component {
 
     PatchStock = () => {
         var name = this.state.stockName;
-        var price = parseInt(this.state.stockPrice);
+        var price = parseFloat(this.state.stockPrice);
 
         var value = { "name": name, "price": price };
         var url = 'stock/' + name;
