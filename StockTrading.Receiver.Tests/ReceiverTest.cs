@@ -19,7 +19,7 @@ namespace StockTrading.Receiver.Tests
             var item = new Document
             {
                 ["Name"] = "STOCK",
-                ["Price"] = 123.45f,
+                ["Price"] = 123.45,
                 ["LastUpdated"] = currentTime
             };
 
@@ -28,7 +28,7 @@ namespace StockTrading.Receiver.Tests
             StockRespons expectedResponse = new StockRespons
             {
                 Name = "STOCK",
-                Price = 123.45f,
+                Price = 123.45,
                 LastUpdated = currentTime
             };
 
@@ -52,14 +52,14 @@ namespace StockTrading.Receiver.Tests
             StockRespons stockResponse = new StockRespons
             {
                 Name = "STOCK",
-                Price = 123.45f,
+                Price = 123.45,
                 LastUpdated = currentTime
             };
 
             var expectedDocument = new Document
             {
                 ["Name"] = "STOCK",
-                ["Price"] = 123.45f,
+                ["Price"] = 123.45,
                 ["LastUpdated"] = currentTime
             };
 
@@ -84,12 +84,12 @@ namespace StockTrading.Receiver.Tests
 
             var item1 = new Document();
             item1["Name"] = "STOCK1";
-            item1["Price"] = 123.45f;
+            item1["Price"] = 123.45;
             item1["LastUpdated"] = currentTime;
 
             var item2 = new Document();
             item2["Name"] = "STOCK2";
-            item2["Price"] = 111.11f;
+            item2["Price"] = 111.11;
             item2["LastUpdated"] = currentTime;
 
             List<Document> itemList = new List<Document>();
@@ -98,12 +98,12 @@ namespace StockTrading.Receiver.Tests
 
             StockRespons expectedItem1 = new StockRespons();
             expectedItem1.Name = "STOCK1";
-            expectedItem1.Price = 123.45f;
+            expectedItem1.Price = 123.45;
             expectedItem1.LastUpdated = currentTime;
 
             StockRespons expectedItem2 = new StockRespons();
             expectedItem2.Name = "STOCK2";
-            expectedItem2.Price = 111.11f;
+            expectedItem2.Price = 111.11;
             expectedItem2.LastUpdated = currentTime;
 
             List<StockRespons> expectedItemList = new List<StockRespons>
@@ -129,7 +129,9 @@ namespace StockTrading.Receiver.Tests
                 Assert.AreEqual(expectedItemList[count].Price, enumerator.Current.Price);
                 Assert.AreEqual(expectedItemList[count].LastUpdated, enumerator.Current.LastUpdated);
             }
-            
         }
+
+        [Test]
+        public void 
     }
 }
