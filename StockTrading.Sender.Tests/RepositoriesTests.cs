@@ -11,10 +11,65 @@ namespace StockTrading.Sender.Tests
     public class RepositoriesTests
     {
         [SetUp]
-        public void Setup(){}
+        public void Setup()
+        {
+            //instantiate StockTradingRepository
+        }
 
         [Test]
-        public void _Test()
+        public void GetAllItems_Test()
+        {
+            // Arrange
+
+
+            // Act
+
+
+            // Assert
+
+        }
+
+        [Test]
+        public void GetItem_Test()
+        {
+            // Arrange
+
+
+            // Act
+
+
+            // Assert
+
+        }
+
+        [Test]
+        public void AddStock_Test()
+        {
+            // Arrange
+
+
+            // Act
+
+
+            // Assert
+
+        }
+
+        [Test]
+        public void DeleteStock_Test()
+        {
+            // Arrange
+
+
+            // Act
+
+
+            // Assert
+
+        }
+
+        [Test]
+        public void UpdateStock_Test()
         {
             // Arrange
 

@@ -16,7 +16,6 @@ namespace StockTrading.Sender.Tests
         public void Setup()
         {
             //Setup new instance of senderservice here
-            IStockTradingRepository TestRepository = new StockTradingRepository()
         }
 
         [Test]
