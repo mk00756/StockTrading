@@ -13,6 +13,7 @@ namespace StockTrading.Sender.Mappers
         {
             return items.Select(ToStockContract);
         }
+
         public StockResponse ToStockContract(StockDB stockDB)
         {
             return new StockResponse
