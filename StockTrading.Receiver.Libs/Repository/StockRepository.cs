@@ -9,7 +9,10 @@ namespace StockTrading.Receiver.Repository {
     {
         private const string TableName = "StockTraderReceaver";
         private readonly Table _table;
-        public StockRepository(IAmazonDynamoDB dynamoDbCleint) => _table = Table.LoadTable(dynamoDbCleint, TableName);
+        public StockRepository(IAmazonDynamoDB dynamoDbCleint, string TableName)
+        {
+            _table = Table.LoadTable(dynamoDbCleint, TableName);
+        }
         public async Task<IEnumerable<Document>> GetAllItems()
         {
             var config = new ScanOperationConfig();

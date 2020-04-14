@@ -1,8 +1,11 @@
+using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using NUnit.Framework;
 using StockTrading.Receiver.Contracts;
 using StockTrading.Receiver.Methods;
+using StockTrading.Receiver.Repository;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StockTrading.Receiver.Tests
 {
@@ -132,6 +135,19 @@ namespace StockTrading.Receiver.Tests
         }
 
         [Test]
-        public void 
+        public async Task StockRep_GetAllItems_ReturnsAllItems()
+        {
+            // Arrange
+            var stockrep = new StockRepository(new AmazonDynamoDBClient(), "StockTraderReceaver");
+            // Act
+            var result = await stockrep.GetAllItems();
+            // Assert
+            var enumerator = result.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                System.Console.WriteLine(enumerator.Current["Name"]);
+                Assert.AreEqual(enumerator.Current["Name"], "GOLD FUTURES");
+            }
+        }
     }
 }
