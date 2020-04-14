@@ -3,6 +3,7 @@ using Xunit;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.Collections.Generic;
 
 namespace WebTestingLibrary {
     public class StockTradeSenderWebTest {
@@ -52,24 +53,36 @@ namespace WebTestingLibrary {
                 //Loads the page
                 driver.Navigate().GoToUrl("https://localhost:44372/add");
                 //Veriables
-                string name = "TestStock";
+                string name = "AddingStockByTest";
                 double price = 350;
-                //Adds data to the text box#
+                //Adds data to the text box
                 driver.FindElement(By.Name("stockName")).SendKeys(name);
                 driver.FindElement(By.Name("stockPrice")).SendKeys(price.ToString());
                 driver.FindElement(By.XPath("/html/body/div/div/div/form/div[3]/button")).Click();
-
-            }
-        }
-
-        [Fact]
-        public void CheckStockEgsist() {
-            using(IWebDriver driver = new ChromeDriver()) {
                 //Loads the page
                 driver.Navigate().GoToUrl("https://localhost:44372/");
-                Assert.Equal("https://localhost:44372/", driver.Url);
+                driver.Manage().Window.Maximize();
+                //Checs if the value egsists
+                bool containsValue = false;
+                //Table veriable
+                IWebElement table;
+                //Gets the table
+                table = driver.FindElement(By.XPath("/html/body/div/div/div/div/table"));
+                //Finds all of the cells
+                var allCells = table.FindElements(By.TagName("td"));
+                //Loops through them
+                foreach (var cell in allCells) {
+                    //Checks if the value is in the cell
+                    string text = cell.Text;
+                    if (text == name) {
+                        containsValue = true;
+                        break;
+                    } 
+                }
+                Assert.True(containsValue);
             }
         }
+
 
     }
 }
