@@ -9,7 +9,7 @@ namespace StockTrading.Receiver.Repository {
     {
         private const string TableName = "StockTraderReceaver";
         private readonly Table _table;
-        public StockRepository(IAmazonDynamoDB dynamoDbCleint, string TableName)
+        public StockRepository(IAmazonDynamoDB dynamoDbCleint)
         {
             _table = Table.LoadTable(dynamoDbCleint, TableName);
         }

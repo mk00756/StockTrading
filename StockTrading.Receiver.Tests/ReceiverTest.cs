@@ -138,7 +138,7 @@ namespace StockTrading.Receiver.Tests
         public async Task StockRep_GetAllItems_ReturnsAllItems()
         {
             // Arrange
-            var stockrep = new StockRepository(new AmazonDynamoDBClient(), "StockTraderReceaver");
+            var stockrep = new StockRepository(new AmazonDynamoDBClient());
             // Act
             var result = await stockrep.GetAllItems();
             // Assert
