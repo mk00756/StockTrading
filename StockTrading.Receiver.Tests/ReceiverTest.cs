@@ -138,16 +138,115 @@ namespace StockTrading.Receiver.Tests
         public async Task StockRep_GetAllItems_ReturnsAllItems()
         {
             // Arrange
-            var stockrep = new StockRepository(new AmazonDynamoDBClient());
+            var stockRep = new StockRepository(new AmazonDynamoDBClient());
             // Act
-            var result = await stockrep.GetAllItems();
+            var result = await stockRep.GetAllItems();
             // Assert
             var enumerator = result.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                System.Console.WriteLine(enumerator.Current["Name"]);
                 Assert.IsNotNull(enumerator.Current["Name"]);
             }
+        }
+
+        [Test]
+        public async Task StockRep_GetStockByName_ReturnsNamedItem()
+        {
+            // Arrange
+            string currentTime = System.DateTime.Now.ToString();
+            var stockRep = new StockRepository(new AmazonDynamoDBClient());
+
+            Document newStock = new Document
+            {
+                ["Name"] = "GETSTOCK",
+                ["Price"] = 112.21,
+                ["LastUpdated"] = currentTime
+            };
+            // Act
+            await stockRep.AddStock(newStock);
+            var result = await stockRep.GetStockByName("GETSTOCK");
+            // Assert
+            Assert.AreEqual(result["Name"], newStock["Name"]);
+            Assert.AreEqual(result["Price"], newStock["Price"]);
+            Assert.AreEqual(result["LastUpdated"], newStock["LastUpdated"]);
+            // Clean-up
+            await stockRep.DeleteStock(newStock);
+        }
+
+        [Test]
+        public async Task StockRep_AddStock_AddsStock()
+        {
+            // Arrange
+            string currentTime = System.DateTime.Now.ToString();
+            var stockRep = new StockRepository(new AmazonDynamoDBClient());
+
+            Document newStock = new Document
+            {
+                ["Name"] = "NEWSTOCK",
+                ["Price"] = 135.79,
+                ["LastUpdated"] = currentTime
+            };
+            // Act
+            await stockRep.AddStock(newStock);
+            var result = await stockRep.GetStockByName(newStock["Name"]);
+            // Assert
+            Assert.AreEqual(result["Name"], newStock["Name"]);
+            Assert.AreEqual(result["Price"], newStock["Price"]);
+            Assert.AreEqual(result["LastUpdated"], newStock["LastUpdated"]);
+            // Clean-up
+            await stockRep.DeleteStock(newStock);
+        }
+
+        [Test]
+        public async Task StockRep_DeleteStock_DeletesStock()
+        {
+            // Arrange
+            string currentTime = System.DateTime.Now.ToString();
+            var stockRep = new StockRepository(new AmazonDynamoDBClient());
+
+            Document testStock = new Document
+            {
+                ["Name"] = "DELETEME",
+                ["Price"] = 112.23,
+                ["LastUpdated"] = currentTime
+            };
+            // Act
+            await stockRep.AddStock(testStock);
+            var result1 = await stockRep.GetStockByName(testStock["Name"]);
+            await stockRep.DeleteStock(testStock);
+            var result2 = await stockRep.GetStockByName(testStock["Name"]);
+            // Assert
+            Assert.AreNotEqual(result1, result2);
+        }
+
+        [Test]
+        public async Task StockRep_UpdateStock_UpdatesStock()
+        {
+            // Arrange
+            var stockRep = new StockRepository(new AmazonDynamoDBClient());
+
+            Document oldStock = new Document
+            {
+                ["Name"] = "UPDATEME",
+                ["Price"] = 000.00,
+                ["LastUpdated"] = System.DateTime.Now.ToString()
+            };
+
+            Document newStock = new Document
+            {
+                ["Name"] = "UPDATEME",
+                ["Price"] = 123.45,
+                ["LastUpdated"] = System.DateTime.Now.ToString()
+            };
+            // Act
+            await stockRep.AddStock(oldStock);
+            var result1 = await stockRep.GetStockByName(oldStock["Name"]);
+            await stockRep.UpdateStock(newStock);
+            var result2 = await stockRep.GetStockByName(newStock["Name"]);
+            // Assert
+            Assert.AreNotEqual(result1["Price"], result2["Price"]);
+            // Clean-up
+            await stockRep.DeleteStock(newStock);
         }
     }
 }
