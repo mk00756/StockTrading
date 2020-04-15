@@ -155,6 +155,7 @@ namespace StockTrading.Receiver.Tests
             // Arrange
             string currentTime = System.DateTime.Now.ToString();
             var stockRep = new StockRepository(new AmazonDynamoDBClient());
+            var mapper = new Mapper();
 
             Document newStock = new Document
             {
@@ -162,13 +163,15 @@ namespace StockTrading.Receiver.Tests
                 ["Price"] = 112.21,
                 ["LastUpdated"] = currentTime
             };
+
+            var mappedStock = mapper.ToStockContract(newStock);
             // Act
             await stockRep.AddStock(newStock);
-            var result = await stockRep.GetStockByName("GETSTOCK");
+            var result = mapper.ToStockContract(await stockRep.GetStockByName("GETSTOCK"));
             // Assert
-            Assert.AreEqual(result["Name"], newStock["Name"]);
-            Assert.AreEqual(result["Price"], newStock["Price"]);
-            Assert.AreEqual(result["LastUpdated"], newStock["LastUpdated"]);
+            Assert.AreEqual(mappedStock.Name, result.Name);
+            Assert.AreEqual(mappedStock.Price, result.Price);
+            Assert.AreEqual(mappedStock.LastUpdated, result.LastUpdated);
             // Clean-up
             await stockRep.DeleteStock(newStock);
         }
@@ -179,6 +182,7 @@ namespace StockTrading.Receiver.Tests
             // Arrange
             string currentTime = System.DateTime.Now.ToString();
             var stockRep = new StockRepository(new AmazonDynamoDBClient());
+            var mapper = new Mapper();
 
             Document newStock = new Document
             {
@@ -186,13 +190,15 @@ namespace StockTrading.Receiver.Tests
                 ["Price"] = 135.79,
                 ["LastUpdated"] = currentTime
             };
+
+            var mappedStock = mapper.ToStockContract(newStock);
             // Act
             await stockRep.AddStock(newStock);
-            var result = await stockRep.GetStockByName(newStock["Name"]);
+            var result = mapper.ToStockContract(await stockRep.GetStockByName(newStock["Name"]));
             // Assert
-            Assert.AreEqual(result["Name"], newStock["Name"]);
-            Assert.AreEqual(result["Price"], newStock["Price"]);
-            Assert.AreEqual(result["LastUpdated"], newStock["LastUpdated"]);
+            Assert.AreEqual(mappedStock.Name, result.Name);
+            Assert.AreEqual(mappedStock.Price, result.Price);
+            Assert.AreEqual(mappedStock.LastUpdated, result.LastUpdated);
             // Clean-up
             await stockRep.DeleteStock(newStock);
         }
