@@ -16,8 +16,4 @@
     <ProjectReference Include="..\StockTraiding.Reciver.Contracts\StockTrading.Receiver.Contracts.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Scripts\" />
-  </ItemGroup>
-
 </Project>
