@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StockTrading.Receiver.Services;
 using StockTrading.Receiver.Contracts;
-using StockTrading.Receiver.MessageBroker;
-using StockTrading.Receiver.Consumers;
 using System.Threading;
 
 namespace StockTrading.Receiver.Controllers {

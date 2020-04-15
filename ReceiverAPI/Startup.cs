@@ -5,11 +5,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using StockTrading.Sender.Libs.Repositories;
-using StockTrading.Sender.Mappers;
-using StockTrading.Sender.Services;
+using StockTrading.Receiver;
+using StockTrading.Receiver.Methods;
+using StockTrading.Receiver.Repository;
+using StockTrading.Receiver.Services;
 
-namespace SenderAPI
+namespace ReceiverAPI
 {
     public class Startup
     {
@@ -27,19 +28,17 @@ namespace SenderAPI
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddAWSService<IAmazonDynamoDB>();
-            services.AddSingleton<ISenderService, SenderService>();
+
+            services.AddSingleton<IStockService, StockService>();
+            services.AddSingleton<IStockRepository, StockRepository>();
             services.AddSingleton<IMapper, Mapper>();
-            services.AddSingleton<IStockTradingRepository, StockTradingRepository>();
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sender's API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Receiver's API", Version = "v1" });
             });
-
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,14 +60,12 @@ namespace SenderAPI
             }
 
             app.UseRouting();
-            app.UseMvc();
-
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
         }
     }
 }
