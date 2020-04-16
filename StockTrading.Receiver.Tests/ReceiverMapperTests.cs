@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StockTrading.Receiver.Tests
 {
-    public class Tests
+    public class ReceiverMapperTests
     {
         [SetUp]
         public void Setup() { }
