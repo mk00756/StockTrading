@@ -7,6 +7,7 @@ using StockTrading.Receiver.Consumers;
 using StockTrading.Receiver.Contracts;
 using StockTrading.Receiver.Models;
 using StockTrading.Receiver.Services;
+using StockTrading.Receiver.Twillio;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -78,6 +79,9 @@ namespace StockTrading.Receiver.MessageBroker
         public void ConsumeMessage([FromBody] StockRespons stock)
         {
             _stockServer.DeleteStock(stock);
+            SendSMS send = new SendSMS();
+            send.InitializeSMS();
+            send.sendSMS("DELETED", stock.Name.ToString());
         }
     }
 }
