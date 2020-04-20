@@ -10,46 +10,49 @@ namespace StockTrading.Receiver.Twillio
 {
     public class SendSMS
     {
+        const string fromNumber = "";
+        const string toNumber = "";
+
         public void InitializeSMS()
         {
-            const string accountSid = "";
-            const string authToken = "";
+            var accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
+            var authToken = Environment.GetEnvironmentVariable("TWILIO_AUTH_TOKEN");
 
             TwilioClient.Init(accountSid, authToken);
-
-
+            
         }
 
         public void sendSMS(string operation, string name)
         {
+
             string bodyMessage;
             if (operation == "ADDED")
             {
-                bodyMessage = $"'{operation}' stock {name} to the database";
+                bodyMessage = $"'{operation}' stock '{name}' to the database";
 
             }
             else
             {
-                bodyMessage = $"'{operation}' stock {name} from the database";
+                bodyMessage = $"'{operation}' stock '{name}' from the database";
 
             }
 
             var message = MessageResource.Create(
             body: bodyMessage,
-            from: new PhoneNumber(""),
-            to: new PhoneNumber("")
+            from: new PhoneNumber(fromNumber),
+            to: new PhoneNumber(toNumber)
 
         );
         }
 
         public void sendSMS(string operation, string name, string price)
         {
-            string bodyMessage = $"'{operation}' stock {name} with a new price of {price}.";
+            string bodyMessage = $"'{operation}' stock '{name}' with a new price of {price}.";
 
             var message = MessageResource.Create(
             body: bodyMessage,
-            from: new PhoneNumber(""),
-            to: new PhoneNumber("")
+            from: new PhoneNumber(fromNumber),
+            to: new PhoneNumber(toNumber)
 
         );
         }

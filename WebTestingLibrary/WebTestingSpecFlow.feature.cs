@@ -19,7 +19,7 @@ namespace WebTestingLibrary
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class SpecFlowWebTestingFeature : object, Xunit.IClassFixture<SpecFlowWebTestingFeature.FixtureData>, System.IDisposable
+    public partial class TestingForTheWebSideOfThewSenderAndTheReceaverFeature : object, Xunit.IClassFixture<TestingForTheWebSideOfThewSenderAndTheReceaverFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace WebTestingLibrary
 #line 1 "WebTestingSpecFlow.feature"
 #line hidden
         
-        public SpecFlowWebTestingFeature(SpecFlowWebTestingFeature.FixtureData fixtureData, WebTestingLibrary_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public TestingForTheWebSideOfThewSenderAndTheReceaverFeature(TestingForTheWebSideOfThewSenderAndTheReceaverFeature.FixtureData fixtureData, WebTestingLibrary_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace WebTestingLibrary
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SpecFlowWebTesting", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Testing for the web side of thew sender and the receaver", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,16 +80,16 @@ namespace WebTestingLibrary
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Clicking the serch button on the receaver")]
-        [Xunit.TraitAttribute("FeatureTitle", "SpecFlowWebTesting")]
-        [Xunit.TraitAttribute("Description", "Clicking the serch button on the receaver")]
-        [Xunit.TraitAttribute("Category", "ReceaverTesting")]
-        public virtual void ClickingTheSerchButtonOnTheReceaver()
+        [Xunit.SkippableFactAttribute(DisplayName="Add a stock")]
+        [Xunit.TraitAttribute("FeatureTitle", "Testing for the web side of thew sender and the receaver")]
+        [Xunit.TraitAttribute("Description", "Add a stock")]
+        [Xunit.TraitAttribute("Category", "Sender")]
+        public virtual void AddAStock()
         {
             string[] tagsOfScenario = new string[] {
-                    "ReceaverTesting"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Clicking the serch button on the receaver", null, new string[] {
-                        "ReceaverTesting"});
+                    "Sender"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a stock", null, new string[] {
+                        "Sender"});
 #line 4
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -111,26 +111,29 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 5
- testRunner.Given("I am on the right page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I am on the add stock page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 6
- testRunner.When("I press the serch button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I have eenter a stock name and a stock price", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 7
- testRunner.Then("The data apears in the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I press the add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 8
+ testRunner.Then("the stock shopuld apear in the table on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Adding a stock using the sender")]
-        [Xunit.TraitAttribute("FeatureTitle", "SpecFlowWebTesting")]
-        [Xunit.TraitAttribute("Description", "Adding a stock using the sender")]
-        public virtual void AddingAStockUsingTheSender()
+        [Xunit.SkippableFactAttribute(DisplayName="Update a Stock")]
+        [Xunit.TraitAttribute("FeatureTitle", "Testing for the web side of thew sender and the receaver")]
+        [Xunit.TraitAttribute("Description", "Update a Stock")]
+        public virtual void UpdateAStock()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding a stock using the sender", null, ((string[])(null)));
-#line 9
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a Stock", null, ((string[])(null)));
+#line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -150,20 +153,106 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 10
- testRunner.Given("I am on the add page on the sender", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 11
- testRunner.When("A stock name is entered in the name box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("I am on the update stock page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 12
- testRunner.When("A price is added in the price box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I have eenter a stock name and a stock price", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 13
- testRunner.When("I click the add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I press the update button button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 14
- testRunner.Then("the stock should apear in the table on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the stock price shuld update on the hopme page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Remove Stock")]
+        [Xunit.TraitAttribute("FeatureTitle", "Testing for the web side of thew sender and the receaver")]
+        [Xunit.TraitAttribute("Description", "Remove Stock")]
+        public virtual void RemoveStock()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove Stock", null, ((string[])(null)));
+#line 16
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 17
+ testRunner.Given("I am on the delete page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 18
+ testRunner.And("I have enterd a stock to delet", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 19
+ testRunner.When("I click the delete button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 20
+ testRunner.Then("The strock should have been removed from the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Serching for a stock")]
+        [Xunit.TraitAttribute("FeatureTitle", "Testing for the web side of thew sender and the receaver")]
+        [Xunit.TraitAttribute("Description", "Serching for a stock")]
+        [Xunit.TraitAttribute("Category", "Receaver")]
+        public virtual void SerchingForAStock()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Receaver"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Serching for a stock", null, new string[] {
+                        "Receaver"});
+#line 23
+ this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 24
+ testRunner.Given("I am on the home page of the receaver", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 25
+ testRunner.And("I have entered in a stock to serch for", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 26
+ testRunner.When("I click the serch buton", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 27
+ testRunner.Then("The text should show the name of the stock I serched for", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -176,12 +265,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                SpecFlowWebTestingFeature.FeatureSetup();
+                TestingForTheWebSideOfThewSenderAndTheReceaverFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                SpecFlowWebTestingFeature.FeatureTearDown();
+                TestingForTheWebSideOfThewSenderAndTheReceaverFeature.FeatureTearDown();
             }
         }
     }

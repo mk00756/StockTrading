@@ -1,14 +1,26 @@
-﻿Feature: SpecFlowWebTesting
+﻿Feature: Sender and revcever testing
+@Sender
+Scenario: Add a stock
+	Given I am on the add stock page
+	And I have eenter a stock name and a stock price
+	When I press the add button
+	Then the stock shopuld apear in the table on the home page
 
-@ReceaverTesting
-Scenario: Clicking the serch button on the receaver
-	Given I am on the right page
-	When I press the serch button
-	Then The data apears in the table
+Scenario: Update a Stock
+	Given I am on the update stock page
+	And I have eenter a stock name and a stock price
+	When I press the update button button
+	Then the stock price shuld update on the hopme page
 
-Scenario: Adding a stock using the sender
-	Given I am on the add page on the sender
-	When A stock name is entered in the name box
-	When A price is added in the price box
-	When I click the add button
-	Then the stock should apear in the table on the home page
+Scenario: Remove Stock
+	Given I am on the delete page
+	And I have enterd a stock to delet
+	When I click the delete button
+	Then The strock should have been removed from the table
+
+@Receaver
+	Scenario: Serching for a stock
+	Given I am on the home page of the receaver
+	And I have entered in a stock to serch for
+	When I click the serch buton
+	Then The text should show the name of the stock I serched for
