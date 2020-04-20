@@ -13,6 +13,7 @@ namespace StockTrading.Receiver.Twillio
         const string fromNumber = "";
         const string toNumber = "";
 
+
         public void InitializeSMS()
         {
             var accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
